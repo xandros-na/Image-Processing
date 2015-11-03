@@ -4,11 +4,11 @@ from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory
 from werkzeug import secure_filename
 
-UPLOAD_FOLDER = os.path.join(app.static_folder, 'imgs')
 ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config.from_pyfile('flaskapp.cfg')
+UPLOAD_FOLDER = os.path.join(app.static_folder, 'imgs')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
