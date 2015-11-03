@@ -8,7 +8,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 app.config.from_pyfile('flaskapp.cfg')
-app.config['UPLOAD_FOLDER'] = os.environ.get('OPENSHIFT_DATA_DIR')
+app.config['UPLOAD_FOLDER'] = app.config['DATA_DIR']
 
 @app.route('/')
 def index():
@@ -33,6 +33,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.close()
             flash('success')
             return redirect(url_for('uploaded_file',
                                     filename=filename))
