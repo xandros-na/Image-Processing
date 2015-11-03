@@ -11,6 +11,15 @@
 
 <section class='container'>
 <h1>cp467</h1>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </section>
 </body>
 </html>
