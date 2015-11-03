@@ -35,7 +35,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file.close()
             flash('success')
-            return redirect(url_for('image'))
+            return redirect(url_for('image'), filename=filename)
     return '''
     <!doctype html>
     <title>Upload new File</title>
