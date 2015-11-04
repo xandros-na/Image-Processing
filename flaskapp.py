@@ -7,8 +7,9 @@ from werkzeug import secure_filename
 ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
+run_config = 'dev'
 app.config.from_pyfile('flaskapp.cfg')
-app.config['UPLOAD_FOLDER'] = app.config['DATA_DIR']
+app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
 
 @app.route('/<path:resource>')
 def serveStaticResource(resource):
@@ -20,7 +21,7 @@ def allowed_file(filename):
 
 @app.route('/image/<filename>')
 def image(filename):
-    if os.path.isfile(os.path.join(app.config['DATA_DIR'], filename)):
+    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
         return render_template('index.html', filename=filename)
     else:
         return 404
@@ -35,7 +36,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file.close()
             flash('success')
-            return redirect('/')
+            return redirect(url_for('image', filename=filename))
     return '''
     <!doctype html>
     <title>Upload new File</title>

@@ -11,6 +11,7 @@
 
 <section class='container'>
 <h1>cp467</h1>
+<img src='../static/img/{{ filename }}'>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -21,7 +22,5 @@
   {% endif %}
 {% endwith %}
 </section>
-
-<img src='{% filename %}'>
 </body>
 </html>
