@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from flask import Flask, request, flash, url_for, redirect, \
-     render_template, abort, send_from_directory
+     render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 
@@ -26,7 +26,7 @@ def image(filename):
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
         return render_template('index.html', filename=filename)
     else:
-        return 404
+        return abort(404)
 
 
 @app.route('/', methods=['GET', 'POST'])
