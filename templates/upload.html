@@ -11,6 +11,7 @@
 
 <section class='container'>
 <h1>cp467</h1>
+<h1>Upload new File</h1>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>
@@ -21,8 +22,11 @@
   {% endif %}
 {% endwith %}
 
-<img src='../static/img/{{ filename }}'>
-
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
 </section>
 </body>
 </html>
+
