@@ -38,12 +38,23 @@ def upload_file():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 file.close()
-                flash('success')
                 return redirect(url_for('image', filename=filename))
             except RequestEntityTooLarge as e:
                 flash('data too large')
                 return redirect(url_for('upload_file'))
            
     return render_template('upload.html')
-if __name__ == '__main__':
+
+
+@app.route('/filter', methods=['POST'])
+def filter():
+    kernel = [[0,0,0], [0,0,0], [0,0,0]]
+    counter = 0
+    for k in range(len(kernel)):
+        for j in range(len(kernel)):
+            kernel[k][j] = request.form['k'+str(counter)]
+            counter += 1 
+    return render_template('index.html')
+
+if __name__ == '__main__': 
     app.run()

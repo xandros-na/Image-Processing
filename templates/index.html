@@ -20,10 +20,20 @@
     </ul>
   {% endif %}
 {% endwith %}
-
+<h1>Before:</h1>
 <img src='../static/img/{{ filename }}'>
-<button type="submit" value="LowPass">Low Pass Filter</button>
-<button type="submit" value="HighPass">High Pass Filter</button>
+<form action="{{ url_for('filter') }}" method=post>
+  <input type=text name=k0></input>
+  <input type=text name=k1></input>
+  <input type=text name=k2></input><br>
+  <input type=text name=k3></input>
+  <input type=text name=k4></input>
+  <input type=text name=k5></input><br>
+  <input type=text name=k6></input>
+  <input type=text name=k7></input>
+  <input type=text name=k8></input><br>
+  <button type="submit" value="apply">Apply Filter</button>
+</form>
 </section>
 </body>
 </html>
