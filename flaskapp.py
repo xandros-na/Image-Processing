@@ -4,6 +4,8 @@ from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
+from filters.filters import open_file, get_matrix, apply_kernel, \
+     produce_output, save_img
 
 ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
 
