@@ -8,7 +8,7 @@ from filters.filters import open_file, get_matrix, apply_kernel, \
      produce_output, save_img
 from datetime import datetime
 
-ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['bmp'])
 
 app = Flask(__name__)
 run_config = 'dev'
