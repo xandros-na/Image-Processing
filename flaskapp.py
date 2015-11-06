@@ -1,11 +1,12 @@
 import os
-from datetime import datetime
+import time
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 from filters.filters import open_file, get_matrix, apply_kernel, \
      produce_output, save_img
+from datetime import datetime
 
 ALLOWED_EXTENSIONS = set(['txt', 'bmp', 'png', 'jpg', 'jpeg'])
 
@@ -54,9 +55,18 @@ def filter():
     counter = 0
     for k in range(len(kernel)):
         for j in range(len(kernel)):
-            kernel[k][j] = request.form['k'+str(counter)]
-            counter += 1 
-    return render_template('index.html')
+            kernel[k][j] = float(request.form['k'+str(counter)])
+            counter += 1
+
+    filename = request.form['filename'] 
+    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    output = produce_output(kernel, pixels, width, height)
+    new_file = save_img(width, height, im, output, filename)
+
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
+
+    return render_template('index.html', filename=filename, new_file=new_file)
 
 if __name__ == '__main__': 
     app.run()
