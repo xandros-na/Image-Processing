@@ -34,7 +34,6 @@ def image(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def upload():
-    print("werf")
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
