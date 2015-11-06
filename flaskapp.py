@@ -45,28 +45,56 @@ def upload_file():
             except RequestEntityTooLarge as e:
                 flash('data too large')
                 return redirect(url_for('upload_file'))
-           
+
     return render_template('index.html')
+
+
+def convert(n):
+    try:
+        float(n)
+        return float(n)
+    except ValueError as v:
+        return False
+
+
+def parse(k):
+    if '/' in k:
+        fraction = k.split("/")
+        numer = convert(fraction[0])
+        denom = convert(fraction[1])
+        if numer and denom:
+            return numer/denom
+        else:
+            return False
+    else:
+        n = convert(k)
+        return n
 
 
 @app.route('/filter', methods=['POST'])
 def filter():
     kernel = [[0,0,0], [0,0,0], [0,0,0]]
     counter = 0
-    for k in range(len(kernel)):
-        for j in range(len(kernel)):
-            kernel[k][j] = float(request.form['k'+str(counter)])
-            counter += 1
+    filename = request.form['filename']
 
-    filename = request.form['filename'] 
+    for k in range(len(kernel)):
+         for j in range(len(kernel)):
+             n = parse(request.form['k'+str(counter)])
+             if n:
+                 kernel[k][j] = n
+             else:
+                 flash("Bad kernel value")
+                 return render_template('index.html', filename=filename)
+
+
     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     output = produce_output(kernel, pixels, width, height)
     new_file = save_img(width, height, im, output, filename)
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
-
     return render_template('index.html', filename=filename, new_file=new_file)
 
-if __name__ == '__main__': 
+
+if __name__ == '__main__':
     app.run()

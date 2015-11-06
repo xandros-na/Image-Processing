@@ -15,26 +15,43 @@
       <p><input type=file name=file>
          <input type=submit value=Upload>
     </form>
-    
-<h1>Before:</h1>
-<div>{{ filename }}</div>
-<img src='../static/img/{{ filename }}'>
-<form action="{{ url_for('filter') }}" method=post>
-  <input type=text name=k0></input>
-  <input type=text name=k1></input>
-  <input type=text name=k2></input><br>
-  <input type=text name=k3></input>
-  <input type=text name=k4></input>
-  <input type=text name=k5></input><br>
-  <input type=text name=k6></input>
-  <input type=text name=k7></input>
-  <input type=text name=k8></input><br>
-  <input type=hidden name=filename value="{{filename}}"></input>
-  <button type="submit" value="apply">Apply Filter</button>
-</form>
-<h1>After:</h1>
-<div>{{ new_file }}</div>
-<img src='../static/img/{{ new_file }}'>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+{% if filename %}
+  <h1>Before:</h1>
+  <div>{{ filename }}</div>
+  <img src='../static/img/{{ filename }}'>
+  <form action="{{ url_for('filter') }}" method=post>
+    <input type=text name=k0></input>
+    <input type=text name=k1></input>
+    <input type=text name=k2></input><br>
+    <input type=text name=k3></input>
+    <input type=text name=k4></input>
+    <input type=text name=k5></input><br>
+    <input type=text name=k6></input>
+    <input type=text name=k7></input>
+    <input type=text name=k8></input><br>
+    <input type=hidden name=filename value="{{filename}}"></input>
+    <button type="submit" value="apply">Apply Filter</button>
+  </form>
+{% endif %}
+
+{% if new_file %}
+  <h1>After:</h1>
+  <div>{{ new_file }}</div>
+  <img src='../static/img/{{ new_file }}'>
+{% endif %}
+
 </section>
 </body>
 </html>
