@@ -79,13 +79,13 @@ def filter():
 
     for k in range(len(kernel)):
          for j in range(len(kernel)):
-             n = parse(request.form['k'+str(counter)])
-             if n:
-                 kernel[k][j] = n
-             else:
-                 flash("Bad kernel value")
-                 return render_template('index.html', filename=filename)
-
+            n = parse(request.form['k'+str(counter)])
+            if n:
+                kernel[k][j] = n
+                counter += 1
+            else:
+                flash("Bad kernel value")
+                return render_template('index.html', filename=filename)
 
     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     output = produce_output(kernel, pixels, width, height)
