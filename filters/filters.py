@@ -1,6 +1,8 @@
 from PIL import Image
 from PIL import ImageFilter
 import copy
+import time
+from datetime import datetime
 
 KERNEL_SIZE = 3
 def open_file(filename):
@@ -29,11 +31,11 @@ def apply_kernel(kernel, matrix):
 	return s
 
 
-def produce_output(kernel, matrix, pixels, width, height):
+def produce_output(kernel, pixels, width, height):
 	output = copy.deepcopy(pixels)
 	for r in range(height):
 		for c in range(width):
-			matrix = get_matrix(r, c)
+			matrix = get_matrix(r, c, width, height, pixels)
 			s = apply_kernel(kernel, matrix)
 			output[r][c] = round(s)
 	return output
@@ -43,5 +45,8 @@ def save_img(width, height, im, output, filename):
 	for r in range(height):
 		for c in range(width):
 			im.putpixel((c,r),output[r][c])
-	im.save("new" + filename)
-	return
+	ts = time.time() 
+	ts = datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+	new_file = ts + filename
+	im.save(new_file)
+	return new_file
