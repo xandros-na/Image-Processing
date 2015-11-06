@@ -46,7 +46,7 @@ def upload_file():
                 flash('data too large')
                 return redirect(url_for('upload_file'))
            
-    return render_template('upload.html')
+    return render_template('index.html')
 
 
 @app.route('/filter', methods=['POST'])

@@ -11,15 +11,11 @@
 
 <section class='container'>
 <h1>cp467</h1>
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+    
 <h1>Before:</h1>
 <div>{{ filename }}</div>
 <img src='../static/img/{{ filename }}'>
