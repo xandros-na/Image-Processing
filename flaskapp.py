@@ -33,7 +33,8 @@ def image(filename):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def upload_file():
+def upload():
+    print("werf")
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
@@ -44,7 +45,7 @@ def upload_file():
                 return redirect(url_for('image', filename=filename))
             except RequestEntityTooLarge as e:
                 flash('data too large')
-                return redirect(url_for('upload_file'))
+                return redirect(url_for('upload'))
 
     return render_template('index.html')
 
