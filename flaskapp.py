@@ -45,6 +45,8 @@ def upload():
             except RequestEntityTooLarge as e:
                 flash('data too large')
                 return redirect(url_for('upload'))
+        else:
+            flash('File extension not allowed. Only .bmp files are supported')
 
     return render_template('index.html')
 
