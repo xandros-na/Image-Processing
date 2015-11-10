@@ -44,6 +44,10 @@
     <input type=hidden name=filename value="{{filename}}"></input>
     <button type="submit" value="apply">Apply Filter</button>
   </form>
+  <form action="{{ url_for('thinning') }}" method=post>
+    <input type=hidden name=filename value="{{filename}}"></input>
+    <button type="submit" value="apply">Apply ZS Thinning</button>
+  </form>
 {% endif %}
 
 {% if new_file %}

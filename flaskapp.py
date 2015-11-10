@@ -1,11 +1,13 @@
 import os
 import time
+import copy
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
-from filters.filters import open_file, get_matrix, apply_kernel, \
-     produce_output, save_img
+from filters import open_file, get_matrix, apply_kernel, \
+     produce_output, save_img, binary_print
+from thinning import zs_thin, BLACK, WHITE
 from datetime import datetime
 
 ALLOWED_EXTENSIONS = set(['bmp'])
@@ -93,6 +95,39 @@ def filter():
     output = produce_output(kernel, pixels, width, height)
     new_file = save_img(width, height, im, output, filename)
 
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
+    return render_template('index.html', filename=filename, new_file=new_file)
+
+
+@app.route('/thinning', methods=['POST'])
+def thinning():
+    filename = request.form['filename']
+    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+    flag = 1
+    processing = True
+    output = copy.deepcopy(pixels)
+    original = copy.deepcopy(pixels)
+
+    while processing: 
+        changed=False
+        for r in range(height):
+            for c in range(width):
+                if pixels[r][c] == BLACK:
+                    matrix = get_matrix(r, c, width, height, pixels)
+                    if zs_thin(matrix, flag):
+                        print("changed")
+                        pixels[r][c] = WHITE
+                        output[r][c] = WHITE
+                        changed=True
+        if changed is False:
+            processing= False
+        flag*=-1
+
+    binary_print(output)
+    new_file = save_img(width, height, im, output, filename)
+    
     basedir = os.path.abspath(os.path.dirname(__file__))
     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
     return render_template('index.html', filename=filename, new_file=new_file)

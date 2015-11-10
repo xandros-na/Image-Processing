@@ -44,9 +44,20 @@ def produce_output(kernel, pixels, width, height):
 def save_img(width, height, im, output, filename):
 	for r in range(height):
 		for c in range(width):
-			im.putpixel((c,r),output[r][c])
+			im.putpixel((c,r), output[r][c])
+
 	ts = time.time() 
 	ts = datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
 	new_file = ts + filename
 	im.save(new_file)
 	return new_file
+
+def binary_print(pixels):
+	for r in pixels:
+		for c in r:
+			if c == 255:
+				print('0', end="")
+			else:
+				print('1', end="")
+		print()
+	return
