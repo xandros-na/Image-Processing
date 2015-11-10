@@ -6,7 +6,7 @@ from flask import Flask, request, flash, url_for, redirect, \
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 from filters import open_file, get_matrix, apply_kernel, \
-     produce_output, save_img, binary_print
+     produce_output, save_img
 from thinning import zs_thin, BLACK, WHITE
 from datetime import datetime
 
@@ -125,7 +125,6 @@ def thinning():
             processing= False
         flag*=-1
 
-    binary_print(output)
     new_file = save_img(width, height, im, output, filename)
     
     basedir = os.path.abspath(os.path.dirname(__file__))
