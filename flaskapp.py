@@ -107,24 +107,24 @@ def thinning():
 
     flag = 1
     processing = True
-    output = copy.deepcopy(pixels)
-    original = copy.deepcopy(pixels)
 
     while processing: 
+        temp_pixel = copy.deepcopy(pixels)
         changed=False
         for r in range(height):
             for c in range(width):
                 if pixels[r][c] == BLACK:
                     matrix = get_matrix(r, c, width, height, pixels)
                     if zs_thin(matrix, flag):
-                        print("changed")
-                        pixels[r][c] = WHITE
-                        output[r][c] = WHITE
+                        temp_pixel[r][c] = WHITE
                         changed=True
+        pixels = temp_pixel
         if changed is False:
             processing= False
+
         flag*=-1
 
+    output = pixels
     new_file = save_img(width, height, im, output, filename)
     
     basedir = os.path.abspath(os.path.dirname(__file__))

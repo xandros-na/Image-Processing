@@ -24,7 +24,7 @@ def zs_thin(matrix, flag):
 	points = [p2, p3, p4, p5, p6, p7, p8, p9]
 	if flag == 1:
 		return neighbor_check(matrix) and zero_one_check(points) and p2p4p6(points) and p4p6p8(points)
-	return neighbor_check(matrix) and zero_one_check(points) and p2p6p8(points) and p2p6p8(points)
+	return neighbor_check(matrix) and zero_one_check(points) and p2p4p8(points) and p2p6p8(points)
 
 def zero_one_check(points):
 	tempo = None
@@ -43,12 +43,12 @@ def zero_one_check(points):
 	return False
 
 def p2p4p6(points):
-	if WHITE in [points[1], points[3], points[5]]:
+	if WHITE in [points[0], points[2], points[4]]:
 		return True
 	return False
 	
 def p4p6p8(points):
-	if WHITE in [points[3], points[5], points[7]]:
+	if WHITE in [points[2], points[4], points[6]]:
 		return True
 	return False
 
@@ -56,12 +56,12 @@ def p4p6p8(points):
 second iteration
 '''
 def p2p4p8(points):
-	if WHITE in [points[1], points[3], points[7]]:
+	if WHITE in [points[0], points[2], points[6]]:
 		return True
 	return False
 
 def p2p6p8(points):
-	if WHITE in [points[1], points[5], points[7]]:
+	if WHITE in [points[0], points[4], points[6]]:
 		return True
 	return False
 '''
