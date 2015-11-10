@@ -52,12 +52,12 @@ def save_img(width, height, im, output, filename):
 	im.save(new_file)
 	return new_file
 
-def binary_print(pixels):
-	for r in pixels:
-		for c in r:
-			if c == 255:
-				print('0', end="")
-			else:
-				print('1', end="")
-		print()
-	return
+# def binary_print(pixels):
+# 	for r in pixels:
+# 		for c in r:
+# 			if c == 255:
+# 				print('0', end="")
+# 			else:
+# 				print('1', end="")
+# 		print()
+# 	return
