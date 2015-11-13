@@ -8,6 +8,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 from filters import open_file, get_matrix, apply_kernel, \
      produce_output, save_img
 from thinning import zs_thin, BLACK, WHITE
+from features import feature_histogram, trim
 from datetime import datetime
 
 ALLOWED_EXTENSIONS = set(['bmp'])
@@ -131,6 +132,13 @@ def thinning():
     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
     return render_template('index.html', filename=filename, new_file=new_file)
 
+@app.route('/vetor', methods=['POST'])
+def vector():
+    filename = request.form['filename']
+    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    trimmed, w, h = trim(pixels, width, height)
+    vector = feature_histogram(trimmed, w, h)    
 
+    return render_template('index.html', filename=filename, vector=vector)
 if __name__ == '__main__':
     app.run()

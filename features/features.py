@@ -1,11 +1,11 @@
-def trim(matrix):
+def trim(matrix, width, height):
 	largest_y = 0
 	largest_x = 0
-	lowest_y = len(matrix[0])
-	lowest_x = len(matrix)
+	lowest_y = width
+	lowest_x = height
 
-	for x in range(len(matrix)):
-		for y in range(len(matrix[0])):
+	for x in range(height):
+		for y in range(width):
 			if matrix[x][y] == 0:
 				if x < lowest_x:
 					lowest_x = x
@@ -16,22 +16,22 @@ def trim(matrix):
 				if y > largest_y:
 					largest_y = y
 	trimmed = [[0 for j in range(largest_y-lowest_y+1)] for i in range(largest_x - lowest_x+1)]
-	print(len(trimmed), len(trimmed[0]))
-	for x in range(len(matrix)):
-		for y in range(len(matrix[0])):
+	
+	for x in range(height):
+		for y in range(width):
 			if lowest_x <= x <= largest_x and lowest_y <= y <= largest_y:
 				trimmed[x-lowest_x][y-lowest_y] = matrix[x][y]
-	return trimmed
+	return trimmed, len(trimmed[0]), len(trimmed)
 
-def feature_histogram(matrix):
+def feature_histogram(matrix, width, height):
 	vertical = [0 for i in range(16)]
 	horizontal = [0 for i in range(16)]
 
-	sub_y = len(matrix[0]) // 16
-	sub_x = len(matrix) // 16
+	sub_y = width // 16
+	sub_x = height // 16
 
-	for x in range(len(matrix)):
-		for y in range(len(matrix[0])):
+	for x in range(height):
+		for y in range(width):
 			if matrix[x][y] == 0:
 				if x>15*sub_x:
 					vertical[15]+=1

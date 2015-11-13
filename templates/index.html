@@ -31,6 +31,8 @@
   <h1>Before:</h1>
   <div>{{ filename }}</div>
   <img src='../static/img/{{ filename }}'>
+  
+  <!--Filter-->
   <form action="{{ url_for('filter') }}" method=post>
     <input type=text name=k0></input>
     <input type=text name=k1></input>
@@ -44,9 +46,17 @@
     <input type=hidden name=filename value="{{filename}}"></input>
     <button type="submit" value="apply">Apply Filter</button>
   </form>
+
+  <!--Thinning-->
   <form action="{{ url_for('thinning') }}" method=post>
     <input type=hidden name=filename value="{{filename}}"></input>
     <button type="submit" value="apply">Apply ZS Thinning</button>
+  </form>
+
+  <!--Vector-->
+  <form action="{{ url_for('vector') }}" method=post>
+    <input type=hidden name=filename value="{{filename}}"></input>
+    <button type="submit" value="apply">Get the image's vector</button>
   </form>
 {% endif %}
 
@@ -56,6 +66,10 @@
   <img src='../static/img/{{ new_file }}'>
 {% endif %}
 
+{% if vector %}
+  <h1>Vector for this image:</h1>
+  <div>{{ vector }}</div>
+{% endif %}
 </section>
 </body>
 </html>
