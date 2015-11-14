@@ -118,10 +118,7 @@ def vector():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
-    print(trimmed)
-    img_vector = feature_histogram(trimmed)
-    print(img_vector)
-
+    img_vector = feature_histogram(trimmed)    
     return render_template('index.html', filename=filename, img_vector=img_vector)
 
 if __name__ == '__main__':

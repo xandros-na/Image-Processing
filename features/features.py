@@ -45,6 +45,6 @@ def feature_histogram(trimmed):
 
 	feature_vector = []
 	for i, j in zip(vertical, horizontal):
-		feature_vector.append((i-j)/(i+j))
+		feature_vector.append(round(i-j*1.0)/(i+j*1.0), 2))
 	return feature_vector
 
