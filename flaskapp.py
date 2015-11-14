@@ -113,12 +113,13 @@ def thinning():
     move_file(new_file)
     return render_template('index.html', filename=filename, new_file=new_file)
 
-@app.route('/vetor', methods=['POST'])
+@app.route('/vector', methods=['POST'])
 def vector():
-    filename = request.form['filename']
-    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    vector = feature_histogram(trim(img))    
-    return render_template('index.html', filename=filename, vector=vector)
+    # filename = request.form['filename']
+    # img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # vector = feature_histogram(trim(img))    
+    vector = [1,2,3]
+    return render_template('index.html', vector=vector)
 
 if __name__ == '__main__':
     app.run()
