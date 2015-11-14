@@ -89,7 +89,7 @@ def filter():
     for k in range(len(kernel)):
          for j in range(len(kernel)):
             n = parse(request.form['k'+str(counter)])
-            if n:
+            if n is not False:
                 kernel[k][j] = n
                 counter += 1
             else:
