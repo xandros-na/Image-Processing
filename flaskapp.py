@@ -117,8 +117,7 @@ def thinning():
 def vector():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    # vector = feature_histogram(trim(img))    
-    vector = [1,2,3]
+    vector = feature_histogram(trim(img))    
     return render_template('index.html', vector=vector)
 
 if __name__ == '__main__':
