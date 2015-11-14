@@ -9,7 +9,6 @@ from filters import get_matrix, apply_kernel, produce_output
 from ImageFile import ImageFile
 from thinning import zs_thin
 from features import feature_histogram, trim
-from datetime import datetime
 
 ALLOWED_EXTENSIONS = set(['bmp'])
 
@@ -20,9 +19,6 @@ app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
 app.config['MAX_CONTENT_LENGTH'] = 512 * 1024
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-@app.route('/<path:resource>')
-def serveStaticResource(resource):
-    return send_from_directory('static/', resource)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -42,7 +38,7 @@ def upload():
         file = request.files['file']
         if file and allowed_file(file.filename):
             try:
-                filename = secure_filename(file.filename)
+                filename = ImageFile.time_stamp() + secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 file.close()
                 return redirect(url_for('image', filename=filename))
