@@ -5,9 +5,9 @@ from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
-from filters import open_file, get_matrix, apply_kernel, \
-     produce_output, save_img
-from thinning import zs_thin, BLACK, WHITE
+from filters import get_matrix, apply_kernel, produce_output
+from ImageFile import ImageFile
+# from thinning import zs_thin, BLACK, WHITE
 from features import feature_histogram, trim
 from datetime import datetime
 
@@ -92,53 +92,53 @@ def filter():
                 flash("Bad kernel value")
                 return render_template('index.html', filename=filename)
 
-    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    output = produce_output(kernel, pixels, width, height)
-    new_file = save_img(width, height, im, output, filename)
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    output = produce_output(kernel, img)
+    new_file = img.save_img(output, filename)
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
     return render_template('index.html', filename=filename, new_file=new_file)
 
 
-@app.route('/thinning', methods=['POST'])
-def thinning():
-    filename = request.form['filename']
-    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+# @app.route('/thinning', methods=['POST'])
+# def thinning():
+#     filename = request.form['filename']
+#     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    flag = 1
-    processing = True
+#     flag = 1
+#     processing = True
 
-    while processing: 
-        temp_pixel = copy.deepcopy(pixels)
-        changed=False
-        for r in range(height):
-            for c in range(width):
-                if pixels[r][c] == BLACK:
-                    matrix = get_matrix(r, c, width, height, pixels)
-                    if zs_thin(matrix, flag):
-                        temp_pixel[r][c] = WHITE
-                        changed=True
-        pixels = temp_pixel
-        if changed is False:
-            processing= False
+#     while processing: 
+#         temp_pixel = copy.deepcopy(pixels)
+#         changed=False
+#         for r in range(height):
+#             for c in range(width):
+#                 if pixels[r][c] == BLACK:
+#                     matrix = get_matrix(r, c, width, height, pixels)
+#                     if zs_thin(matrix, flag):
+#                         temp_pixel[r][c] = WHITE
+#                         changed=True
+#         pixels = temp_pixel
+#         if changed is False:
+#             processing= False
 
-        flag*=-1
+#         flag*=-1
 
-    output = pixels
-    new_file = save_img(width, height, im, output, filename)
+#     output = pixels
+#     new_file = save_img(width, height, im, output, filename)
     
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
-    return render_template('index.html', filename=filename, new_file=new_file)
+#     basedir = os.path.abspath(os.path.dirname(__file__))
+#     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
+#     return render_template('index.html', filename=filename, new_file=new_file)
 
-@app.route('/vetor', methods=['POST'])
-def vector():
-    filename = request.form['filename']
-    im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    trimmed, w, h = trim(pixels, width, height)
-    vector = feature_histogram(trimmed, w, h)    
+# @app.route('/vetor', methods=['POST'])
+# def vector():
+#     filename = request.form['filename']
+#     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#     trimmed, w, h = trim(pixels, width, height)
+#     vector = feature_histogram(trimmed, w, h)    
 
-    return render_template('index.html', filename=filename, vector=vector)
+#     return render_template('index.html', filename=filename, vector=vector)
 if __name__ == '__main__':
     app.run()

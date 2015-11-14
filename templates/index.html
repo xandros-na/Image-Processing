@@ -47,18 +47,7 @@
     <button type="submit" value="apply">Apply Filter</button>
   </form>
 
-  <!--Thinning-->
-  <form action="{{ url_for('thinning') }}" method=post>
-    <input type=hidden name=filename value="{{filename}}"></input>
-    <button type="submit" value="apply">Apply ZS Thinning</button>
-  </form>
-
-  <!--Vector-->
-  <form action="{{ url_for('vector') }}" method=post>
-    <input type=hidden name=filename value="{{filename}}"></input>
-    <button type="submit" value="apply">Get the image's vector</button>
-  </form>
-{% endif %}
+ {% endif %}
 
 {% if new_file %}
   <h1>After:</h1>
@@ -66,10 +55,6 @@
   <img src='../static/img/{{ new_file }}'>
 {% endif %}
 
-{% if vector %}
-  <h1>Vector for this image:</h1>
-  <div>{{ vector }}</div>
-{% endif %}
 </section>
 </body>
 </html>
