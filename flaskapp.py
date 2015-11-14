@@ -119,7 +119,7 @@ def vector():
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
     vector = feature_histogram(trimmed)    
-    return render_template('index.html', vector=[1,2,3])
+    return render_template('index.html', filename=filename, vector=vector)
 
 if __name__ == '__main__':
     app.run()
