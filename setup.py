@@ -5,5 +5,5 @@ setup(name='CP467 Image Processing Project',
       description='Web app that implements filters, thinning and feature vectors',
       author='Chunxiao Li and Don Miguel',
       author_email='lixx8170@mylaurier.ca, migu0850@mylaurier.ca',
-     install_requires=['Flask>=0.10.1', 'Pillow==2.6.1', 'Werkzeug==0.11.2'],
+     install_requires=['Flask>=0.10.1', 'Pillow==2.6.1', 'Werkzeug>=0.8.3'],
      )
