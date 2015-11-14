@@ -7,7 +7,7 @@ from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 from filters import get_matrix, apply_kernel, produce_output
 from ImageFile import ImageFile
-# from thinning import zs_thin, BLACK, WHITE
+from thinning import zs_thin
 from features import feature_histogram, trim
 from datetime import datetime
 
@@ -18,6 +18,7 @@ run_config = 'dev'
 app.config.from_pyfile('flaskapp.cfg')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
 app.config['MAX_CONTENT_LENGTH'] = 512 * 1024
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/<path:resource>')
 def serveStaticResource(resource):
@@ -75,6 +76,9 @@ def parse(k):
         n = convert(k)
         return n
 
+def move_file(new_file):
+    os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
+    return
 
 @app.route('/filter', methods=['POST'])
 def filter():
@@ -95,50 +99,26 @@ def filter():
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     output = produce_output(kernel, img)
     new_file = img.save_img(output, filename)
-
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
+    move_file(new_file)
     return render_template('index.html', filename=filename, new_file=new_file)
 
 
-# @app.route('/thinning', methods=['POST'])
-# def thinning():
-#     filename = request.form['filename']
-#     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+@app.route('/thinning', methods=['POST'])
+def thinning():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-#     flag = 1
-#     processing = True
+    output = zs_thin(img)
+    new_file = img.save_img(output, filename)
+    move_file(new_file)
+    return render_template('index.html', filename=filename, new_file=new_file)
 
-#     while processing: 
-#         temp_pixel = copy.deepcopy(pixels)
-#         changed=False
-#         for r in range(height):
-#             for c in range(width):
-#                 if pixels[r][c] == BLACK:
-#                     matrix = get_matrix(r, c, width, height, pixels)
-#                     if zs_thin(matrix, flag):
-#                         temp_pixel[r][c] = WHITE
-#                         changed=True
-#         pixels = temp_pixel
-#         if changed is False:
-#             processing= False
+@app.route('/vetor', methods=['POST'])
+def vector():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    vector = feature_histogram(trim(img))    
+    return render_template('index.html', filename=filename, vector=vector)
 
-#         flag*=-1
-
-#     output = pixels
-#     new_file = save_img(width, height, im, output, filename)
-    
-#     basedir = os.path.abspath(os.path.dirname(__file__))
-#     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
-#     return render_template('index.html', filename=filename, new_file=new_file)
-
-# @app.route('/vetor', methods=['POST'])
-# def vector():
-#     filename = request.form['filename']
-#     im, fp, width, height, pixels = open_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#     trimmed, w, h = trim(pixels, width, height)
-#     vector = feature_histogram(trimmed, w, h)    
-
-#     return render_template('index.html', filename=filename, vector=vector)
 if __name__ == '__main__':
     app.run()
