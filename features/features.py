@@ -1,8 +1,8 @@
 def trim(img):
 	largest_y = 0
 	largest_x = 0
-	lowest_y = img.img.width
-	lowest_x = img.img.height
+	lowest_y = img.width
+	lowest_x = img.height
 
 	for x in range(img.height):
 		for y in range(img.width):
