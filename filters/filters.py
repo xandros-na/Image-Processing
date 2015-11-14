@@ -25,14 +25,3 @@ def produce_output(kernel, img):
 			s = apply_kernel(kernel, matrix)
 			output[r][c] = round(s)
 	return output
-
-
-# def binary_print(pixels):
-# 	for r in pixels:
-# 		for c in r:
-# 			if c == 255:
-# 				print('0', end="")
-# 			else:
-# 				print('1', end="")
-# 		print()
-# 	return
