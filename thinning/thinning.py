@@ -31,9 +31,7 @@ def neighbor_check(matrix):
             if j == BLACK:
                 counter += 1
 
-    if 2 <= counter-1 <=6:
-        return True
-    return False
+    return 2 <= counter-1 <=6
 
 def _zs_thin_conditions(matrix, flag):
     p2 = matrix[0][1]
@@ -61,32 +59,22 @@ def zero_one_check(points):
     if tempo == WHITE and points[0] == BLACK:
         counter += 1
 
-    if counter == 1:
-        return True
-    return False
+    return counter == 1
 
 def p2p4p6(points):
-    if WHITE in [points[0], points[2], points[4]]:
-        return True
-    return False
+    return WHITE in [points[0], points[2], points[4]]
 
 def p4p6p8(points):
-    if WHITE in [points[2], points[4], points[6]]:
-        return True
-    return False
+    return WHITE in [points[2], points[4], points[6]]
 
 '''
 second iteration
 '''
 def p2p4p8(points):
-    if WHITE in [points[0], points[2], points[6]]:
-        return True
-    return False
+    return WHITE in [points[0], points[2], points[6]]
 
 def p2p6p8(points):
-    if WHITE in [points[0], points[4], points[6]]:
-        return True
-    return False
+    return WHITE in [points[0], points[4], points[6]]
 '''
 end second iteration
 '''
