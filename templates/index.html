@@ -5,16 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title></title>
 
+<link rel="stylesheet" type="text/css" media="all" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
   <link href="{{ url_for('static', filename='css/site.css') }}" rel='stylesheet' type='text/css' />
 </head>
 <body>
 
 <section class='container'>
-<h1>cp467</h1>
+  <h1>CP467</h1>
+    <section class="upload">
     <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
+        <input type="file" name="file" class="select-file">
+        <br>
+        <button type="submit" class="suggested-action" value="Upload">Upload</button>
     </form>
+  </section>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -27,12 +31,15 @@
 {% endwith %}
 
 
+<div class="picture">
 {% if filename %}
-  <h1>Before:</h1>
+<div class="before">
+  <h2>Before:</h2>
   <div>{{ filename }}</div>
   <img src='../static/img/{{ filename }}'>
-  
+  <br><br>
   <!--Filter-->
+  <h4>Enter Kernel</h4>
   <form action="{{ url_for('filter') }}" method=post>
     <input type=text name=k0></input>
     <input type=text name=k1></input>
@@ -58,13 +65,18 @@
     <input type=hidden name=filename value="{{filename}}"></input>
     <button type="submit" value="apply">Get Vector for this Image</button>
   </form>
+  </div>
  {% endif %}
 
-{% if new_file %}
-  <h1>After:</h1>
-  <div>{{ new_file }}</div>
-  <img src='../static/img/{{ new_file }}'>
-{% endif %}
+
+  {% if new_file %}
+  <div class="after">
+    <h2>After:</h2>
+    <div>{{ new_file }}</div>
+    <img src='../static/img/{{ new_file }}'>
+  </div>
+  {% endif %}
+</div>
 
 {% if img_vector %}
   <h1>Vector for this Image:</h1>
