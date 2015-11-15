@@ -12,6 +12,7 @@
   <body>
     <div class='container'>
         <h1>CP467 Image Processing Final Project</h1>
+        <h4 id="author">Authors: Chunxiao Li and Don Miguel</h4>
 
         <div class="upload">
             <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
@@ -19,20 +20,15 @@
                 <br>
                 <button type="submit" class="suggested-action" value="Upload">Upload</button>
             </form>
+            {% with messages = get_flashed_messages() %}
+              {% if messages and "File" in messages[-1]%}
+                <div class="warning">{{messages[-1]}}</div>
+              {% endif %}
+            {% endwith %}            
         </div>
 
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-          <ul class=flashes>
-              {% for message in messages %}
-              <li>{{ message }}</li>
-              {% endfor %}
-          </ul>
-          {% endif %}
-        {% endwith %}
-
-        <div class="picture">
-            {% if filename %}
+        {% if filename %}
+            <div class="picture">
               <div class="before">
                   <h2>Before:</h2>
                   <div>{{ filename }}</div>
@@ -41,6 +37,11 @@
 
                   <!--Filter-->
                   <h4>Enter Kernel</h4>
+                  {% with messages = get_flashed_messages() %}
+                    {% if messages and "kernel" in messages[-1]%}
+                      <div class="warning">{{messages[-1]}}</div>
+                    {% endif %}
+                  {% endwith %}   
                   <form action="{{ url_for('filter') }}" method=post>
                       <input type=text name=k0></input>
                       <input type=text name=k1></input>
@@ -67,7 +68,7 @@
                       <button type="submit" value="apply">Get Vector for this Image</button>
                   </form>
               </div>
-            {% endif %}
+            
 
             {% if new_file %}
               <div class="after">
@@ -76,7 +77,8 @@
                   <img src='../static/img/{{ new_file }}'>
               </div>
             {% endif %}
-        </div>
+          </div>
+        {% endif %}
 
         {% if img_vector %}
           <div class="vector">

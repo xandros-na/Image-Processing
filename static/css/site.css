@@ -14,13 +14,18 @@ body {
 h1 {
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    text-align: center;
 }
 
 h2, h4 {
     margin: 0 0 8px 0;
 }
 
+#author {
+    font-weight: 300;
+    text-align: center;
+}
 
 hr {
     background: #c9c9c9;
@@ -97,4 +102,9 @@ input[type="text"] {
 .after {
     width: 50%;
     float: right;
+}
+
+.warning {
+    color: #ef5357;
+    margin: 8px 0px;
 }
