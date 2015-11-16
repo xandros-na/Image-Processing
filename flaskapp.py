@@ -8,7 +8,7 @@ from werkzeug.exceptions import RequestEntityTooLarge
 from filters import get_matrix, apply_kernel, produce_output
 from ImageFile import ImageFile
 from thinning import zs_thin
-from features import feature_histogram, trim
+from features import feature_histogram, trim, zoning_method
 
 ALLOWED_EXTENSIONS = set(['bmp'])
 
@@ -109,12 +109,20 @@ def thinning():
     move_file(new_file)
     return render_template('index.html', filename=filename, new_file=new_file)
 
-@app.route('/vector', methods=['POST'])
-def vector():
+@app.route('/histogram', methods=['POST'])
+def histogram():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
     img_vector = feature_histogram(trimmed)    
+    return render_template('index.html', filename=filename, img_vector=img_vector)
+
+@app.route('/zoning', methods=['POST'])
+def zoning():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    trimmed = trim(img)
+    img_vector = zoning_method(trimmed)    
     return render_template('index.html', filename=filename, img_vector=img_vector)
 
 if __name__ == '__main__':
