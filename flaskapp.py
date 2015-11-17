@@ -16,7 +16,7 @@ app = Flask(__name__)
 run_config = 'dev'
 app.config.from_pyfile('flaskapp.cfg')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
-app.config['MAX_CONTENT_LENGTH'] = 512 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 0.5 * 1024 * 1024
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
