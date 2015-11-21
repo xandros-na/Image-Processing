@@ -1,5 +1,4 @@
-601
-         2302549 function calls (2302531 primitive calls) in 6.267 seconds
+         6513047 function calls (6513029 primitive calls) in 11.444 seconds
 
    Ordered by: standard name
 
@@ -17,19 +16,19 @@
         1    0.001    0.001    0.001    0.001 GifImagePlugin.py:28(<module>)
         1    0.000    0.000    0.000    0.000 GifImagePlugin.py:54(GifImageFile)
         1    0.000    0.000    0.001    0.001 Image.py:1106(getdata)
-   360000    0.289    0.000    0.834    0.000 Image.py:1481(putpixel)
+   360000    0.292    0.000    0.845    0.000 Image.py:1481(putpixel)
         1    0.000    0.000    0.004    0.004 Image.py:1615(save)
         1    0.000    0.000    0.000    0.000 Image.py:1947(_ImageCrop)
         1    0.000    0.000    0.000    0.000 Image.py:1983(ImagePointHandler)
         1    0.000    0.000    0.000    0.000 Image.py:1988(ImageTransformHandler)
         1    0.000    0.000    0.000    0.000 Image.py:2213(_decompression_bomb_check)
-        1    0.000    0.000    0.008    0.008 Image.py:2227(open)
+        1    0.000    0.000    0.007    0.007 Image.py:2227(open)
         6    0.000    0.000    0.000    0.000 Image.py:2393(register_open)
         4    0.000    0.000    0.000    0.000 Image.py:2408(register_mime)
         6    0.000    0.000    0.000    0.000 Image.py:2419(register_save)
        12    0.000    0.000    0.000    0.000 Image.py:2430(register_extension)
         1    0.004    0.004    0.010    0.010 Image.py:27(<module>)
-        2    0.001    0.001    0.008    0.004 Image.py:338(preinit)
+        2    0.001    0.001    0.007    0.003 Image.py:338(preinit)
         1    0.000    0.000    0.000    0.000 Image.py:34(DecompressionBombWarning)
         1    0.000    0.000    0.000    0.000 Image.py:38(_imaging_not_installed)
         1    0.000    0.000    0.000    0.000 Image.py:401(_getdecoder)
@@ -38,9 +37,9 @@
         1    0.000    0.000    0.000    0.000 Image.py:477(Image)
         1    0.000    0.000    0.000    0.000 Image.py:491(__init__)
         4    0.000    0.000    0.000    0.000 Image.py:599(__getattr__)
-   360004    0.203    0.000    0.243    0.000 Image.py:736(load)
+   360004    0.204    0.000    0.246    0.000 Image.py:736(load)
         1    0.000    0.000    0.000    0.000 ImageColor.py:20(<module>)
-   360003    0.226    0.000    0.470    0.000 ImageFile.py:130(load)
+   360003    0.230    0.000    0.477    0.000 ImageFile.py:130(load)
         1    0.000    0.000    0.000    0.000 ImageFile.py:259(load_prepare)
         1    0.000    0.000    0.000    0.000 ImageFile.py:268(load_end)
         1    0.000    0.000    0.000    0.000 ImageFile.py:281(StubImageFile)
@@ -123,7 +122,7 @@
         2    0.000    0.000    0.000    0.000 __init__.py:382(__getitem__)
         1    0.000    0.000    0.000    0.000 __init__.py:388(PyDLL)
         1    0.000    0.000    0.000    0.000 __init__.py:397(WinDLL)
-        1    0.003    0.003    0.003    0.003 __init__.py:4(<module>)
+        1    0.002    0.002    0.003    0.003 __init__.py:4(<module>)
         1    0.000    0.000    0.000    0.000 __init__.py:406(HRESULT)
         1    0.000    0.000    0.000    0.000 __init__.py:419(OleDLL)
         1    0.000    0.000    0.000    0.000 __init__.py:428(LibraryLoader)
@@ -196,7 +195,7 @@
         1    0.000    0.000    0.000    0.000 numbers.py:270(Rational)
         1    0.000    0.000    0.000    0.000 numbers.py:295(Integral)
         1    0.000    0.000    0.000    0.000 numbers.py:34(Complex)
-        1    0.000    0.000    0.000    0.000 numbers.py:6(<module>)
+        1    0.000    0.000    0.001    0.001 numbers.py:6(<module>)
         2    0.000    0.000    0.000    0.000 re.py:192(compile)
         2    0.000    0.000    0.000    0.000 re.py:230(_compile)
         5    0.000    0.000    0.000    0.000 sre_compile.py:228(_compile_charset)
@@ -222,16 +221,18 @@
         2    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
         2    0.000    0.000    0.000    0.000 sre_parse.py:686(parse)
         4    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
-        1    0.004    0.004    6.267    6.267 thinning.py:1(<module>)
-        1    0.002    0.002    0.003    0.003 thinning.py:109(zero_padding)
+        1    0.004    0.004   11.444   11.444 thinning.py:1(<module>)
+   319688    0.029    0.000    0.029    0.000 thinning.py:119(<lambda>)
         1    0.000    0.000    0.000    0.000 thinning.py:12(ImageFile)
-        1    0.001    0.001    0.025    0.025 thinning.py:13(__init__)
-        1    0.015    0.015    0.024    0.024 thinning.py:18(_open_file)
-        1    0.000    0.000    6.252    6.252 thinning.py:197(main)
-        1    0.198    0.198    1.037    1.037 thinning.py:27(save_img)
+        1    0.001    0.001    0.024    0.024 thinning.py:13(__init__)
+   271616    0.024    0.000    0.024    0.000 thinning.py:142(<lambda>)
+        1    0.015    0.015    0.023    0.023 thinning.py:18(_open_file)
+        1    0.000    0.000   11.429   11.429 thinning.py:195(main)
+        1    0.201    0.201    1.051    1.051 thinning.py:27(save_img)
         1    0.000    0.000    0.000    0.000 thinning.py:36(time_stamp)
-        1    4.965    4.965    5.189    5.189 thinning.py:43(zs_thin)
-   302056    0.025    0.000    0.025    0.000 thinning.py:85(<lambda>)
+        1    5.387    5.387   10.354   10.354 thinning.py:43(zs_thin)
+        1    0.002    0.002    0.003    0.003 thinning.py:72(zero_padding)
+  3898075    4.553    0.000    4.740    0.000 thinning.py:94(_zs_thin_conditions)
         1    0.000    0.000    0.000    0.000 traceback.py:1(<module>)
         1    0.000    0.000    0.000    0.000 {PIL._imaging.new}
         1    0.000    0.000    0.000    0.000 {PIL._imaging.raw_decoder}
@@ -249,7 +250,7 @@
        11    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x1E229480}
         1    0.000    0.000    0.000    0.000 {built-in method fromtimestamp}
        56    0.000    0.000    0.000    0.000 {chr}
-    37757    0.060    0.000    0.085    0.000 {filter}
+    73913    0.133    0.000    0.187    0.000 {filter}
       273    0.000    0.000    0.000    0.000 {getattr}
         5    0.000    0.000    0.000    0.000 {hasattr}
        42    0.000    0.000    0.000    0.000 {isinstance}
@@ -261,7 +262,7 @@
        12    0.000    0.000    0.000    0.000 {method '__subclasses__' of 'type' objects}
        12    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
        92    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
-    75187    0.006    0.000    0.006    0.000 {method 'append' of 'list' objects}
+    74155    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'cleanup' of 'ImagingDecoder' objects}
         1    0.000    0.000    0.000    0.000 {method 'cleanup' of 'ImagingEncoder' objects}
         3    0.000    0.000    0.000    0.000 {method 'clear' of 'dict' objects}
@@ -280,9 +281,9 @@
         1    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
        13    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
         1    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
-   360003    0.040    0.000    0.040    0.000 {method 'pixel_access' of 'ImagingCore' objects}
+   360003    0.042    0.000    0.042    0.000 {method 'pixel_access' of 'ImagingCore' objects}
         6    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
-   360000    0.076    0.000    0.076    0.000 {method 'putpixel' of 'ImagingCore' objects}
+   360000    0.077    0.000    0.077    0.000 {method 'putpixel' of 'ImagingCore' objects}
         7    0.000    0.000    0.000    0.000 {method 'read' of 'file' objects}
        12    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
         9    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
@@ -302,9 +303,9 @@
         2    0.000    0.000    0.000    0.000 {nt.stat}
         2    0.000    0.000    0.000    0.000 {open}
        38    0.000    0.000    0.000    0.000 {ord}
-    43276    0.127    0.000    0.127    0.000 {range}
+    73927    0.218    0.000    0.218    0.000 {range}
         3    0.000    0.000    0.000    0.000 {setattr}
         1    0.000    0.000    0.000    0.000 {sorted}
-    42601    0.005    0.000    0.005    0.000 {time.time}
+        1    0.000    0.000    0.000    0.000 {time.time}
 
 

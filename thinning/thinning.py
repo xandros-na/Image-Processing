@@ -81,15 +81,15 @@ def zero_padding(img):
 
     return img
 
-def neighbor_check(points):
-    counter = 0
-    # for i in points:
-    #     if i==0:
-    #         counter+=1
-    b = filter(lambda x:x==0, points)
-    for i in b:
-        counter += 1
-    return 2 <= counter-1 <=6
+# def neighbor_check(points):
+#     counter = 0
+#     # for i in points:
+#     #     if i==0:
+#     #         counter+=1
+#     b = filter(lambda x:x==0, points)
+#     for i in b:
+#         counter += 1
+#     return 2 <= counter-1 <=6
 
 def _zs_thin_conditions(r,c,img, flag):
     p2 = img.pixels[r-1][c]
@@ -100,45 +100,97 @@ def _zs_thin_conditions(r,c,img, flag):
     p7 = img.pixels[r+1][c-1]
     p8 = img.pixels[r][c-1]
     p9 = img.pixels[r-1][c-1]
-    points = [p2, p3, p4, p5, p6, p7, p8, p9]
 
     if flag == 1:
-        return p2p4p6(p2, p4, p6) and  p4p6p8(p4, p6, p8) and zero_one_check(points) and neighbor_check(points)
-    return  p2p6p8(p2, p6, p8) and  p2p4p8(p2, p4, p8) and  zero_one_check(points) and neighbor_check(points)
-    #     return neighbor_check(points) and zero_one_check(points) and p2p4p6(points) and p4p6p8(points)
-    # return neighbor_check(points) and zero_one_check(points) and p2p4p8(points) and p2p6p8(points)
+        if (p2 == WHITE or p4 == WHITE or p6 == WHITE) and (p4 == WHITE or p6 == WHITE or p8 == WHITE):
+            tempo = None
+            counter = 0
+            for p in (p2,p3,p4,p5,p6,p7,p8,p9):
+                if tempo is not None:
+                    if tempo == WHITE and p == BLACK:
+                        counter += 1
+                tempo = p
 
-def zero_one_check(points):
-    tempo = None
-    counter = 0
-    for p in points:
-        if tempo is not None:
-            if tempo == WHITE and p == BLACK:
+            if tempo == WHITE and p2 == BLACK:
                 counter += 1
-        tempo = p
 
-    if tempo == WHITE and points[0] == BLACK:
-        counter += 1
+            if counter == 1:
+                counter = 0
+                b = filter(lambda x:x==0, (p2,p3,p4,p5,p6,p7,p8,p9))
+                for i in b:
+                    counter += 1
+                return 2 <= counter-1 <=6
+            else:
+                return False            
+        else:
+            return False
+    else:
+        if (p2 == WHITE or p6 == WHITE or p8 == WHITE) and (p2 == WHITE or p4 == WHITE or p8 == WHITE):
+            tempo = None
+            counter = 0
+            for p in (p2,p3,p4,p5,p6,p7,p8,p9):
+                if tempo is not None:
+                    if tempo == WHITE and p == BLACK:
+                        counter += 1
+                tempo = p
 
-    return counter == 1
+            if tempo == WHITE and p2 == BLACK:
+                counter += 1
 
-def p2p4p6(p2, p4, p6):
-    return p2 == WHITE or p4 == WHITE or p6 == WHITE
+            if counter == 1:
+                counter = 0
+                b = filter(lambda x:x==0, (p2,p3,p4,p5,p6,p7,p8,p9))
+                for i in b:
+                    counter += 1
+                return 2 <= counter-1 <=6
+            else:
+                return False            
+        else:
+            return False           
 
-def p4p6p8(p4, p6, p8):
-    return p4 == WHITE or p6 == WHITE or p8 == WHITE
 
-'''
-second iteration
-'''
-def p2p4p8(p2, p6, p8):
-    return p2 == WHITE or p6 == WHITE or p8 ==WHITE
 
-def p2p6p8(p2, p4, p8):
-    return p2 == WHITE or p4 == WHITE or p8 == WHITE
-'''
-end second iteration
-'''
+
+
+
+
+
+#         return p2p4p6(p2, p4, p6) and  p4p6p8(p4, p6, p8) and zero_one_check(points) and neighbor_check(points)
+#     return  p2p6p8(p2, p6, p8) and  p2p4p8(p2, p4, p8) and  zero_one_check(points) and neighbor_check(points)
+#     #     return neighbor_check(points) and zero_one_check(points) and p2p4p6(points) and p4p6p8(points)
+#     # return neighbor_check(points) and zero_one_check(points) and p2p4p8(points) and p2p6p8(points)
+
+# def zero_one_check(points):
+#     tempo = None
+#     counter = 0
+#     for p in points:
+#         if tempo is not None:
+#             if tempo == WHITE and p == BLACK:
+#                 counter += 1
+#         tempo = p
+
+#     if tempo == WHITE and points[0] == BLACK:
+#         counter += 1
+
+#     return counter == 1
+
+# def p2p4p6(p2, p4, p6):
+#     return p2 == WHITE or p4 == WHITE or p6 == WHITE
+
+# def p4p6p8(p4, p6, p8):
+#     return p4 == WHITE or p6 == WHITE or p8 == WHITE
+
+# '''
+# second iteration
+# '''
+# def p2p4p8(p2, p6, p8):
+#     return p2 == WHITE or p6 == WHITE or p8 ==WHITE
+
+# def p2p6p8(p2, p4, p8):
+#     return p2 == WHITE or p4 == WHITE or p8 == WHITE
+# '''
+# end second iteration
+# '''
 
 def main():
     img = ImageFile('2015-11-20-19-05-36-1.bmp')
