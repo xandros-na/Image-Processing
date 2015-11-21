@@ -18,10 +18,15 @@ class ImageFile:
 		fp.close()
 		return
 	
-	def save_img(self, output, filename):
-		for r in range(1,self.height-1):
-			for c in range(1,self.width-1):
-				self.img.putpixel((c-1,r-1), output[r][c])
+	def save_img(self, output, filename, thinning=False):
+		if thinning:
+			for r in range(1,self.height-1):
+				for c in range(1,self.width-1):
+					self.img.putpixel((c-1,r-1), output[r][c])
+		else:
+			for r in range(self.height):
+				for c in range(self.width):
+					self.img.putpixel((c,r), output[r][c])	
 
 		new_file = ImageFile.time_stamp() + filename[20:]
 		self.img.save(new_file)

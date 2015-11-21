@@ -1,6 +1,4 @@
 import os
-import time
-import copy
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
@@ -104,7 +102,7 @@ def thinning():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     output = zs_thin(img)
-    new_file = img.save_img(output, filename)
+    new_file = img.save_img(output, filename, thinning=True)
     move_file(new_file)
     return render_template('index.html', filename=filename, new_file=new_file)
 

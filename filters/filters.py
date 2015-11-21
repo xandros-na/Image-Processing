@@ -1,5 +1,3 @@
-import copy
-
 def get_matrix(r, c, img):
 	m = [[0,0,0], [0,0,0], [0,0,0]]
 	for i in range(-1, 2):
@@ -18,7 +16,7 @@ def apply_kernel(kernel, matrix):
 
 
 def produce_output(kernel, img):
-	output = copy.deepcopy(img.pixels)
+	output = [[0 for i in range(img.width)] for j in range(img.height)]
 	for r in range(img.height):
 		for c in range(img.width):
 			matrix = get_matrix(r, c, img)
