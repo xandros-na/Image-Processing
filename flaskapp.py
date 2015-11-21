@@ -103,7 +103,6 @@ def filter():
 def thinning():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
     output = zs_thin(img)
     new_file = img.save_img(output, filename)
     move_file(new_file)
