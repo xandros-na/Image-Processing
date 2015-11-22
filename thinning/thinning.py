@@ -12,7 +12,7 @@ def zs_thin(img):
         for r in range(1,img.height-1):
             for c in range(1,img.width-1):
                 if img.pixels[r][c] == BLACK:
-                    if _zs_thin_conditions(r,c,img, flag):
+                    if _zs_thin_conditions(r,c,img.pixels, flag):
                         remove.append([r,c])
                         changed=True
 
@@ -36,15 +36,15 @@ def zero_padding(img):
 
     return img
 
-def _zs_thin_conditions(r,c,img, flag):
-    p2 = img.pixels[r-1][c]
-    p3 = img.pixels[r-1][c+1]
-    p4 = img.pixels[r][c+1]
-    p5 = img.pixels[r+1][c+1]
-    p6 = img.pixels[r+1][c]
-    p7 = img.pixels[r+1][c-1]
-    p8 = img.pixels[r][c-1]
-    p9 = img.pixels[r-1][c-1]
+def _zs_thin_conditions(r,c,pixels, flag):
+    p2 = pixels[r-1][c]
+    p3 = pixels[r-1][c+1]
+    p4 = pixels[r][c+1]
+    p5 = pixels[r+1][c+1]
+    p6 = pixels[r+1][c]
+    p7 = pixels[r+1][c-1]
+    p8 = pixels[r][c-1]
+    p9 = pixels[r-1][c-1]
 
     if flag == 1:
         if (p2 == WHITE or p4 == WHITE or p6 == WHITE) and (p4 == WHITE or p6 == WHITE or p8 == WHITE):
@@ -97,7 +97,7 @@ def _zs_thin_conditions(r,c,img, flag):
 def main():
     img = ImageFile('2015-11-20-19-05-36-1.bmp')
     output = zs_thin(img)
-    new_file = img.save_img(output, '2015-11-20-19-05-36-1.bmp')
+    new_file = img.save_img(output, '2015-11-20-19-05-36-1.bmp', thinning=True)
 
 if __name__ == '__main__':
     main()
