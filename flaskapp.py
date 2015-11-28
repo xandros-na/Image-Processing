@@ -137,7 +137,7 @@ def db_test():
     db.session.add(s)
     db.session.add(v)
     db.session.commit()
-    return 200
+    return '<h1> Done </h1>'
 
 @app.route('/test/get/', methods=['GET'])
 def db_get():
