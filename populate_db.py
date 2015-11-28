@@ -7,13 +7,14 @@ zeros = ['0-00a.bmp', '0-00b.bmp', '0-00c.bmp', '0-00d.bmp', '0-00e.bmp']
 ones = ['1-00a.bmp', '1-00b.bmp', '1-00c.bmp', '1-00d.bmp', '1-00e.bmp']
 for j in range(2):
 	if j == 0:
-		path = "./images/zero/" + zeros[i]
+		path = "./images/zero/" + zeros[j]
 		s = models.Symbol(name="zero")
 	else:
-		path = "./images/one/" + ones[i]
+		path = "./images/one/" + ones[j]
 		s = models.Symbol(name="one")
 	db.session.add(s)
 	db.session.commit()
+    print "added " + s.name
 	for i in range(5):
 		img = ImageFile(path)
 		trimmed = trim(img)
@@ -53,6 +54,7 @@ for j in range(2):
     		elif k == 15:
     			v = models.V16(histogram_value=img_vector[k])
     		db.session.add(v)
+            print "added" + str(v.histogram_value)
     		db.session.commit()
 
 
