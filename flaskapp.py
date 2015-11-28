@@ -133,7 +133,7 @@ def zoning():
 @app.route('/test/add/', methods=['GET'])
 def db_test():
     s = models.Symbol(name="test")
-    v = models.v1(histogram_value=0.99, number=s)
+    v = models.V1(histogram_value=0.99, number=s)
     db.session.add(s)
     db.session.add(v)
     db.session.commit()
