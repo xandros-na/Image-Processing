@@ -14,7 +14,7 @@ for j in range(2):
 		s = models.Symbol(name="one")
 	db.session.add(s)
 	db.session.commit()
-    print "added " + s.name
+
 	for i in range(5):
 		img = ImageFile(path)
 		trimmed = trim(img)
@@ -22,39 +22,38 @@ for j in range(2):
 
     	for k in range(16):
     		if k == 0:
-    			v = models.V1(histogram_value=img_vector[k])
+    			v = models.V1(histogram_value=img_vector[k], number=s)
     		elif k == 1:
-    			v = models.V2(histogram_value=img_vector[k])
+    			v = models.V2(histogram_value=img_vector[k], number=s)
     		elif k == 2:
-    			v = models.V3(histogram_value=img_vector[k])
+    			v = models.V3(histogram_value=img_vector[k], number=s)
     		elif k == 3:
-    			v = models.V4(histogram_value=img_vector[k])
+    			v = models.V4(histogram_value=img_vector[k], number=s)
     		elif k == 4:
-    			v = models.V5(histogram_value=img_vector[k])
+    			v = models.V5(histogram_value=img_vector[k], number=s)
     		elif k == 5:
-    			v = models.V6(histogram_value=img_vector[k])
+    			v = models.V6(histogram_value=img_vector[k], number=s)
     		elif k == 6:
-    			v = models.V7(histogram_value=img_vector[k])
+    			v = models.V7(histogram_value=img_vector[k], number=s)
     		elif k == 7:
-    			v = models.V8(histogram_value=img_vector[k])
+    			v = models.V8(histogram_value=img_vector[k], number=s)
     		elif k == 8:
-    			v = models.V9(histogram_value=img_vector[k])
+    			v = models.V9(histogram_value=img_vector[k], number=s)
     		elif k == 9:
-    			v = models.V10(histogram_value=img_vector[k])
+    			v = models.V10(histogram_value=img_vector[k], number=s)
     		elif k == 10:
-    			v = models.V11(histogram_value=img_vector[k])
+    			v = models.V11(histogram_value=img_vector[k], number=s)
     		elif k == 11:
-    			v = models.V12(histogram_value=img_vector[k])
+    			v = models.V12(histogram_value=img_vector[k], number=s)
     		elif k == 12:
-    			v = models.V13(histogram_value=img_vector[k])
+    			v = models.V13(histogram_value=img_vector[k], number=s)
     		elif k == 13:
-    			v = models.V14(histogram_value=img_vector[k])
+    			v = models.V14(histogram_value=img_vector[k], number=s)
     		elif k == 14:
-    			v = models.V15(histogram_value=img_vector[k])
+    			v = models.V15(histogram_value=img_vector[k], number=s)
     		elif k == 15:
-    			v = models.V16(histogram_value=img_vector[k])
+    			v = models.V16(histogram_value=img_vector[k], number=s)
     		db.session.add(v)
-            print "added" + str(v.histogram_value)
     		db.session.commit()
 
 
