@@ -9,17 +9,17 @@ for j in range(2):
 	if j == 0:
         s = models.Symbol(name="zero")
 	else:
-		s = models.Symbol(name="one")
+        s = models.Symbol(name="one")
 	db.session.add(s)
 	db.session.commit()
 
 	for i in range(5):
         if j == 0:
             path = "./images/zero/" + zeros[i]
-            s = models.Symbol(name="zero")
         else:
             path = "./images/one/" + ones[i]
-		img = ImageFile(path)
+		
+        img = ImageFile(path)
 		trimmed = trim(img)
     	img_vector = zoning_method(trimmed)
 
