@@ -179,6 +179,8 @@ def recognize():
             min_index = j
             duplicate = False
 
+    if duplicate:
+        min_index = "Cant tell"
     return render_template('index.html', filename=filename, number=min_index)
 
 
