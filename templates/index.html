@@ -43,34 +43,41 @@
                     {% endif %}
                   {% endwith %}   
                   <form action="{{ url_for('filter') }}" method=post>
-                      <input type=text name=k0></input>
-                      <input type=text name=k1></input>
-                      <input type=text name=k2></input><br>
-                      <input type=text name=k3></input>
-                      <input type=text name=k4></input>
-                      <input type=text name=k5></input><br>
-                      <input type=text name=k6></input>
-                      <input type=text name=k7></input>
-                      <input type=text name=k8></input><br>
-                      <input type=hidden name=filename value="{{filename}}"></input>
+                      <input type=text name=k0>
+                      <input type=text name=k1>
+                      <input type=text name=k2><br>
+                      <input type=text name=k3>
+                      <input type=text name=k4>
+                      <input type=text name=k5><br>
+                      <input type=text name=k6>
+                      <input type=text name=k7>
+                      <input type=text name=k8><br>
+                      <input type=hidden name=filename value="{{filename}}">
                       <button type="submit" value="apply">Apply Filter</button>
                   </form>
 
                   <!--Thinning-->
                   <form action="{{ url_for('thinning') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}"></input>
+                      <input type=hidden name=filename value="{{filename}}">
                       <button type="submit" value="apply">Apply ZS Thinning</button>
                   </form>
 
                   <!--Vector Histogram-->
                   <form action="{{ url_for('histogram') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}"></input>
+                      <input type=hidden name=filename value="{{filename}}">
                       <button type="submit" value="apply">Get Vector (Histogram)</button>
                   </form>
+
                   <!--Vector Zoning-->
                   <form action="{{ url_for('zoning') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}"></input>
+                      <input type=hidden name=filename value="{{filename}}">
                       <button type="submit" value="apply">Get Vector (Zoning)</button>
+                  </form>
+
+                  <!--Symbol Recognition-->
+                  <form action="{{ url_for('recognize') }}" method=post>
+                      <input type=hidden name=filename value="{{filename}}">
+                      <button type="submit" value="apply">What number is this?</button>
                   </form>
               </div>
             
@@ -90,6 +97,13 @@
             <h2>Vector for this Image:</h2>
             <div>{{ img_vector }}</div>
           </div>
+        {% endif %}
+
+        {% if number %}
+        <div class="vector">
+            <h2>The number is:</h2>
+            <div>{{ number }}</div>
+        </div>
         {% endif %}
     </div>
   </body>

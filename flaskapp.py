@@ -153,5 +153,34 @@ def db_get():
     return '<h1>' + all_sym[0].name + '</h1>'
 
 
+@app.route('/recognize', methods=['POST'])
+def recognize():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    trimmed = trim(img)
+    img_vector = zoning_method(trimmed)
+    symbols = models.Symbol.query.all()
+    min_int = 0
+    min_index = 0
+
+    for j, symbol in enumerate(symbols):
+        c = 0
+        duplicate = False
+        for i, v in enumerate(img_vector):
+            data = list(symbol.v1s[j], symbol.v2s[j], symbol.v3s[j], symbol.v4s[j], symbol.v5s[j], symbol.v6s[j], \
+                        symbol.v7s[j], symbol.v8s[j], symbol.v9s[j], symbol.v10s[j], symbol.v11s[j], symbol.v12s[j], \
+                        symbol.v13s[j], symbol.v14s[j], symbol.v15s[j], symbol.v16s[j])
+            c += abs(v - data[i])
+
+        if c == min_int:
+            duplicate = True
+        elif c < min_int:
+            min_int = c
+            min_index = j
+            duplicate = False
+
+    return render_template('index.html', filename=filename, number=min_index)
+
+
 if __name__ == '__main__':
     manager.run()
