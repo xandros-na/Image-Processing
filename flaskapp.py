@@ -7,6 +7,9 @@ from filters import get_matrix, apply_kernel, produce_output
 from ImageFile import ImageFile
 from thinning import zs_thin
 from features import feature_histogram, trim, zoning_method
+from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
 ALLOWED_EXTENSIONS = set(['bmp'])
 
@@ -16,6 +19,11 @@ app.config.from_pyfile('flaskapp.cfg')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
 app.config['MAX_CONTENT_LENGTH'] = 0.5 * 1024 * 1024
 basedir = os.path.abspath(os.path.dirname(__file__))
+db = SQLAlchemy(app)
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+import models
+db.init_app(app)
 
 
 def allowed_file(filename):
@@ -123,4 +131,4 @@ def zoning():
     return render_template('index.html', filename=filename, img_vector=img_vector)
 
 if __name__ == '__main__':
-    app.run()
+    manager.run()
