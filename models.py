@@ -1,7 +1,7 @@
 from flaskapp import db
 
 class Symbol(db.Model):
-	__tablename__ = "symbol"
+	__tablename__ = "Symbol"
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(8), index=True, unique=True)
 	v1s = db.relationship('V1', backref='number', lazy='dynamic')
@@ -22,98 +22,98 @@ class Symbol(db.Model):
 	V16s = db.relationship('V16', backref='number', lazy='dynamic')
 
 class V1(db.Model):
-	__tablename__ = "v1"
+	__tablename__ = "V1"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V2(db.Model):
-	__tablename__ = "v2"
+	__tablename__ = "V2"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 
 class V3(db.Model):
-	__tablename__ = "v3"
+	__tablename__ = "V3"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V4(db.Model):
-	__tablename__ = "v4"
+	__tablename__ = "V4"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V5(db.Model):
-	__tablename__ = "v5"
+	__tablename__ = "V5"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V6(db.Model):
-	__tablename__ = "v6"
+	__tablename__ = "V6"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V7(db.Model):
-	__tablename__ = "v7"
+	__tablename__ = "V7"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V8(db.Model):
-	__tablename__ = "v8"
+	__tablename__ = "V8"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V9(db.Model):
-	__tablename__ = "v9"
+	__tablename__ = "V9"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V10(db.Model):
-	__tablename__ = "v10"
+	__tablename__ = "V10"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V11(db.Model):
-	__tablename__ = "v11"
+	__tablename__ = "V11"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V12(db.Model):
-	__tablename__ = "v12"
+	__tablename__ = "V12"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V13(db.Model):
-	__tablename__ = "v13"
+	__tablename__ = "V13"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V14(db.Model):
-	__tablename__ = "v14"
+	__tablename__ = "V14"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V15(db.Model):
-	__tablename__ = "v15"
+	__tablename__ = "V15"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
 class V16(db.Model):
-	__tablename__ = "v16"
+	__tablename__ = "V16"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
