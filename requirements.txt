@@ -2,7 +2,7 @@ flask==0.10.1
 Pillow==2.6.1
 numpy==1.10.1
 flask-sqlalchemy==2.1
-sqlalchemy==1.0.9
+sqlalchemy==0.7.9
 psycopg2==2.6.1
 flask-migrate==1.6.0
 flask-script==2.0.5
