@@ -130,5 +130,19 @@ def zoning():
     img_vector = zoning_method(trimmed)    
     return render_template('index.html', filename=filename, img_vector=img_vector)
 
+@app.route('/test/add/', methods=['GET'])
+def db_test():
+    s = models.Symbol(name="test")
+    v = models.v1(histogram_value=0.99, number=s)
+    db.session.add(s)
+    db.session.add(v)
+    db.session.commit()
+    return 200
+
+@app.route('/test/get/', methods=['GET'])
+def db_get():
+    all_sym = models.Symbol.query.all()
+    return '<h1>' + all_sym[0].name + '</h1>'
+
 if __name__ == '__main__':
     manager.run()
