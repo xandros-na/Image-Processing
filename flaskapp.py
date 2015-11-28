@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, flash, url_for, redirect, \
-     render_template, abort, send_from_directory, abort
+    render_template, abort, send_from_directory, abort
 from werkzeug import secure_filename
 from werkzeug.exceptions import RequestEntityTooLarge
 from filters import get_matrix, apply_kernel, produce_output
@@ -23,12 +23,14 @@ db = SQLAlchemy(app)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 import models
+
 db.init_app(app)
 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 
 @app.route('/image/<filename>')
 def image(filename):
@@ -71,26 +73,28 @@ def parse(k):
         numer = convert(fraction[0])
         denom = convert(fraction[1])
         if numer and denom:
-            return numer/denom
+            return numer / denom
         else:
             return False
     else:
         n = convert(k)
         return n
 
+
 def move_file(new_file):
     os.rename(new_file, os.path.join(app.config['UPLOAD_FOLDER'], new_file))
     return
 
+
 @app.route('/filter', methods=['POST'])
 def filter():
-    kernel = [[0,0,0], [0,0,0], [0,0,0]]
+    kernel = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     counter = 0
     filename = request.form['filename']
 
     for k in range(len(kernel)):
-         for j in range(len(kernel)):
-            n = parse(request.form['k'+str(counter)])
+        for j in range(len(kernel)):
+            n = parse(request.form['k' + str(counter)])
             if n is not False:
                 kernel[k][j] = n
                 counter += 1
@@ -114,21 +118,24 @@ def thinning():
     move_file(new_file)
     return render_template('index.html', filename=filename, new_file=new_file)
 
+
 @app.route('/histogram', methods=['POST'])
 def histogram():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
-    img_vector = feature_histogram(trimmed)    
+    img_vector = feature_histogram(trimmed)
     return render_template('index.html', filename=filename, img_vector=img_vector)
+
 
 @app.route('/zoning', methods=['POST'])
 def zoning():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
-    img_vector = zoning_method(trimmed)    
+    img_vector = zoning_method(trimmed)
     return render_template('index.html', filename=filename, img_vector=img_vector)
+
 
 @app.route('/test/add/', methods=['GET'])
 def db_test():
@@ -139,10 +146,12 @@ def db_test():
     db.session.commit()
     return '<h1> Done </h1>'
 
+
 @app.route('/test/get/', methods=['GET'])
 def db_get():
     all_sym = models.Symbol.query.all()
     return '<h1>' + all_sym[0].name + '</h1>'
+
 
 if __name__ == '__main__':
     manager.run()
