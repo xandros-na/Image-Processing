@@ -26,51 +26,51 @@ class V(db.Model):
 	histogram_value = db.Column(db.Float)
 	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
 
-class V1(db.Model, V):
+class V1(V):
 	__tablename__ = "v1"
 
-class V2(db.Model, V):
+class V2(V):
 	__tablename__ = "v2"
 
-class V3(db.Model, V):
+class V3(V):
 	__tablename__ = "v3"
 
-class V4(db.Model, V):
+class V4(V):
 	__tablename__ = "v4"
 
-class V5(db.Model, V):
+class V5(V):
 	__tablename__ = "v5"
 
-class V6(db.Model, V):
+class V6(V):
 	__tablename__ = "v6"
 
-class V7(db.Model, V):
+class V7(V):
 	__tablename__ = "v7"
 
-class V8(db.Model, V):
+class V8(V):
 	__tablename__ = "v8"
 
-class V9(db.Model, V):
+class V9(V):
 	__tablename__ = "v9"
 
-class V10(db.Model, V):
+class V10(V):
 	__tablename__ = "v10"
 
-class V11(db.Model, V):
+class V11(V):
 	__tablename__ = "v11"
 
-class V12(db.Model, V):
+class V12(V):
 	__tablename__ = "v12"
 
-class V13(db.Model, V):
+class V13(V):
 	__tablename__ = "v13"
 
-class V14(db.Model, V):
+class V14(V):
 	__tablename__ = "v14"
 
-class V15(db.Model, V):
+class V15(V):
 	__tablename__ = "v15"
 
-class V16(db.Model, V):
+class V16(V):
 	__tablename__ = "v16"
 
