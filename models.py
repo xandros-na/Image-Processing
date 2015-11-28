@@ -25,96 +25,96 @@ class V1(db.Model):
 	__tablename__ = "V1"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V2(db.Model):
 	__tablename__ = "V2"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 
 class V3(db.Model):
 	__tablename__ = "V3"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V4(db.Model):
 	__tablename__ = "V4"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V5(db.Model):
 	__tablename__ = "V5"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V6(db.Model):
 	__tablename__ = "V6"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V7(db.Model):
 	__tablename__ = "V7"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V8(db.Model):
 	__tablename__ = "V8"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V9(db.Model):
 	__tablename__ = "V9"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V10(db.Model):
 	__tablename__ = "V10"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V11(db.Model):
 	__tablename__ = "V11"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V12(db.Model):
 	__tablename__ = "V12"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V13(db.Model):
 	__tablename__ = "V13"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V14(db.Model):
 	__tablename__ = "V14"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V15(db.Model):
 	__tablename__ = "V15"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
 class V16(db.Model):
 	__tablename__ = "V16"
 	id = db.Column(db.Integer, primary_key=True)
 	histogram_value = db.Column(db.Float)
-	symbol_id = db.Column(db.Integer, db.ForeignKey('symbol.id'))
+	symbol_id = db.Column(db.Integer, db.ForeignKey('Symbol.id'))
 
