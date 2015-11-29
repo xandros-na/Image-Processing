@@ -95,7 +95,7 @@ def _zs_thin_conditions(r, c, pixels, flag):
         else:
             return False
 
-        # used for profiling:
+            # used for profiling:
 
 
 def main():

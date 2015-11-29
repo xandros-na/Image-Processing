@@ -160,28 +160,31 @@ def recognize():
     trimmed = trim(img)
     img_vector = zoning_method(trimmed)
     symbols = models.Symbol.query.all()
-    min_int = 0
-    min_index = 0
 
     for j, symbol in enumerate(symbols):
         c = 0
         duplicate = False
         for i, v in enumerate(img_vector):
-            data = list(symbol.v1s[j], symbol.v2s[j], symbol.v3s[j], symbol.v4s[j], symbol.v5s[j], symbol.v6s[j], \
-                        symbol.v7s[j], symbol.v8s[j], symbol.v9s[j], symbol.v10s[j], symbol.v11s[j], symbol.v12s[j], \
-                        symbol.v13s[j], symbol.v14s[j], symbol.v15s[j], symbol.v16s[j])
-            c += abs(v - data[i])
+            data = [symbol.v1s[j], symbol.v2s[j], symbol.v3s[j], symbol.v4s[j], symbol.v5s[j], symbol.v6s[j], \
+                    symbol.v7s[j], symbol.v8s[j], symbol.v9s[j], symbol.v10s[j], symbol.v11s[j], symbol.v12s[j], \
+                    symbol.v13s[j], symbol.v14s[j], symbol.v15s[j], symbol.v16s[j]]
+            c += abs(v - data[i].histogram_value)
 
-        if c == min_int:
-            duplicate = True
-        elif c < min_int:
+        if j == 0:
             min_int = c
-            min_index = j
-            duplicate = False
+            number = symbol.name
+        else:
+            print(c, min_int)
+            if c == min_int:
+                duplicate = True
+            elif c < min_int:
+                min_int = c
+                number = symbol.name
+                duplicate = False
 
     if duplicate:
-        min_index = "Cant tell"
-    return render_template('index.html', filename=filename, number=min_index)
+        number = "Cant tell"
+    return render_template('index.html', filename=filename, number=number)
 
 
 if __name__ == '__main__':

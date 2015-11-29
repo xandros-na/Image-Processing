@@ -20,7 +20,7 @@ class Symbol(db.Model):
     v13s = db.relationship('V13', backref='number', lazy='dynamic')
     v14s = db.relationship('V14', backref='number', lazy='dynamic')
     v15s = db.relationship('V15', backref='number', lazy='dynamic')
-    V16s = db.relationship('V16', backref='number', lazy='dynamic')
+    v16s = db.relationship('V16', backref='number', lazy='dynamic')
 
 
 class V1(db.Model):

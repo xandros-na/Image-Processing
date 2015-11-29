@@ -1,110 +1,115 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>CP467</title>
 
-    <link rel="stylesheet" type="text/css" media="all" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-    <link href="{{ url_for('static', filename='css/site.css') }}" rel='stylesheet' type='text/css' />
-    </head>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+    <link href="{{ url_for('static', filename='css/site.css') }}" rel='stylesheet' type='text/css'/>
+</head>
 
-  <body>
-    <div class='container'>
-        <h1>CP467 Image Processing Final Project</h1>
-        <h4 id="author">Authors: Chunxiao Li and Don Miguel</h4>
+<body>
+<div class='container'>
+    <h1>CP467 Image Processing Final Project</h1>
+    <h4 id="author">Authors: Chunxiao Li and Don Miguel</h4>
 
-        <div class="upload">
-            <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
-                <input type="file" name="file" class="select-file">
-                <br>
-                <button type="submit" class="suggested-action" value="Upload">Upload</button>
-            </form>
-            {% with messages = get_flashed_messages() %}
-              {% if messages and "File" in messages[-1]%}
-                <div class="warning">{{messages[-1]}}</div>
-              {% endif %}
-            {% endwith %}            
-        </div>
+    <div class="upload">
+        <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
+            <input type="file" name="file" class="select-file">
+            <br>
+            <button type="submit" class="suggested-action" value="Upload">Upload</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages and "File" in messages[-1] %}
+                <div class="warning">{{ messages[-1] }}</div>
+            {% endif %}
+        {% endwith %}
+    </div>
 
-        {% if filename %}
-            <div class="picture">
-              <div class="before">
-                  <h2>Before:</h2>
-                  <div>{{ filename }}</div>
-                  <img src='../static/img/{{ filename }}'>
-                  <br><br>
+    {% if filename %}
+        <div class="picture">
+            <div class="before">
+                <h2>Before:</h2>
 
-                  <!--Filter-->
-                  <h4>Enter Kernel</h4>
-                  {% with messages = get_flashed_messages() %}
-                    {% if messages and "kernel" in messages[-1]%}
-                      <div class="warning">{{messages[-1]}}</div>
+                <div>{{ filename }}</div>
+                <img src='../static/img/{{ filename }}'>
+                <br><br>
+
+                <!--Filter-->
+                <h4>Enter Kernel</h4>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages and "kernel" in messages[-1] %}
+                        <div class="warning">{{ messages[-1] }}</div>
                     {% endif %}
-                  {% endwith %}   
-                  <form action="{{ url_for('filter') }}" method=post>
-                      <input type=text name=k0>
-                      <input type=text name=k1>
-                      <input type=text name=k2><br>
-                      <input type=text name=k3>
-                      <input type=text name=k4>
-                      <input type=text name=k5><br>
-                      <input type=text name=k6>
-                      <input type=text name=k7>
-                      <input type=text name=k8><br>
-                      <input type=hidden name=filename value="{{filename}}">
-                      <button type="submit" value="apply">Apply Filter</button>
-                  </form>
+                {% endwith %}
+                <form action="{{ url_for('filter') }}" method=post>
+                    <input type=text name=k0>
+                    <input type=text name=k1>
+                    <input type=text name=k2><br>
+                    <input type=text name=k3>
+                    <input type=text name=k4>
+                    <input type=text name=k5><br>
+                    <input type=text name=k6>
+                    <input type=text name=k7>
+                    <input type=text name=k8><br>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Apply Filter</button>
+                </form>
 
-                  <!--Thinning-->
-                  <form action="{{ url_for('thinning') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}">
-                      <button type="submit" value="apply">Apply ZS Thinning</button>
-                  </form>
+                <!--Thinning-->
+                <form action="{{ url_for('thinning') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Apply ZS Thinning</button>
+                </form>
 
-                  <!--Vector Histogram-->
-                  <form action="{{ url_for('histogram') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}">
-                      <button type="submit" value="apply">Get Vector (Histogram)</button>
-                  </form>
+                <!--Vector Histogram-->
+                <form action="{{ url_for('histogram') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Get Vector (Histogram)</button>
+                </form>
 
-                  <!--Vector Zoning-->
-                  <form action="{{ url_for('zoning') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}">
-                      <button type="submit" value="apply">Get Vector (Zoning)</button>
-                  </form>
+                <!--Vector Zoning-->
+                <form action="{{ url_for('zoning') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Get Vector (Zoning)</button>
+                </form>
 
-                  <!--Symbol Recognition-->
-                  <form action="{{ url_for('recognize') }}" method=post>
-                      <input type=hidden name=filename value="{{filename}}">
-                      <button type="submit" value="apply">What number is this?</button>
-                  </form>
-              </div>
-            
+                <!--Symbol Recognition-->
+                <form action="{{ url_for('recognize') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">What number is this?</button>
+                </form>
+            </div>
+
 
             {% if new_file %}
-              <div class="after">
-                  <h2>After:</h2>
-                  <div>{{ new_file }}</div>
-                  <img src='../static/img/{{ new_file }}'>
-              </div>
+                <div class="after">
+                    <h2>After:</h2>
+
+                    <div>{{ new_file }}</div>
+                    <img src='../static/img/{{ new_file }}'>
+                </div>
             {% endif %}
-          </div>
-        {% endif %}
 
-        {% if img_vector %}
-          <div class="vector">
-            <h2>Vector for this Image:</h2>
-            <div>{{ img_vector }}</div>
-          </div>
-        {% endif %}
+            {% if number %}
+                <div class="after">
+                    <h2>The number is:</h2>
 
-        {% if number %}
-        <div class="vector">
-            <h2>The number is:</h2>
-            <div>{{ number }}</div>
+                    <div>{{ number }}</div>
+                </div>
+            {% endif %}
         </div>
-        {% endif %}
-    </div>
-  </body>
+    {% endif %}
+
+    {% if img_vector %}
+        <div class="vector">
+            <h2>Vector for this Image:</h2>
+
+            <div>{{ img_vector }}</div>
+        </div>
+    {% endif %}
+</div>
+</body>
 </html>
