@@ -22,7 +22,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # db = SQLAlchemy(app)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-import models
+# import models
 
 # db.init_app(app)
 
@@ -135,22 +135,6 @@ def zoning():
     trimmed = trim(img)
     img_vector = zoning_method(trimmed)
     return render_template('index.html', filename=filename, img_vector=img_vector)
-
-
-@app.route('/test/add/', methods=['GET'])
-def db_test():
-    s = models.Symbol(name="test")
-    v = models.V1(histogram_value=0.99, number=s)
-    db.session.add(s)
-    db.session.add(v)
-    db.session.commit()
-    return '<h1> Done </h1>'
-
-
-@app.route('/test/get/', methods=['GET'])
-def db_get():
-    all_sym = models.Symbol.query.all()
-    return '<h1>' + all_sym[0].name + '</h1>'
 
 
 @app.route('/recognize', methods=['POST'])
