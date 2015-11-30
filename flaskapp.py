@@ -7,7 +7,7 @@ from filters import get_matrix, apply_kernel, produce_output
 from ImageFile import ImageFile
 from thinning import zs_thin
 from features import feature_histogram, trim, zoning_method
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
@@ -19,12 +19,12 @@ app.config.from_pyfile('flaskapp.cfg')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'img')
 app.config['MAX_CONTENT_LENGTH'] = 0.5 * 1024 * 1024
 basedir = os.path.abspath(os.path.dirname(__file__))
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 import models
 
-db.init_app(app)
+# db.init_app(app)
 
 
 def allowed_file(filename):
@@ -161,29 +161,30 @@ def recognize():
     img_vector = zoning_method(trimmed)
     symbols = models.Symbol.query.all()
 
-    for j, symbol in enumerate(symbols):
+    f = open("vectors.txt")
+    minimum = 0
+    index = 0
+    duplicates = False
+    for j, line in enumerate(f):
         c = 0
-        duplicate = False
-        for i, v in enumerate(img_vector):
-            data = [symbol.v1s[j], symbol.v2s[j], symbol.v3s[j], symbol.v4s[j], symbol.v5s[j], symbol.v6s[j], \
-                    symbol.v7s[j], symbol.v8s[j], symbol.v9s[j], symbol.v10s[j], symbol.v11s[j], symbol.v12s[j], \
-                    symbol.v13s[j], symbol.v14s[j], symbol.v15s[j], symbol.v16s[j]]
-            c += abs(v - data[i].histogram_value)
+        data = line.strip().split(",")
+        for i, d in enumerate(data):
+            c += abs(float(d) - img_vector[i])
 
         if j == 0:
-            min_int = c
-            number = symbol.name
+            minimum = c
         else:
-            print(c, min_int)
-            if c == min_int:
-                duplicate = True
-            elif c < min_int:
-                min_int = c
-                number = symbol.name
-                duplicate = False
+            if c < minimum:
+                minimum = c
+                index = j/5
+                number = str(index)
+                duplicates = False
+            elif c == minimum:
+                duplicates = True
 
-    if duplicate:
-        number = "Cant tell"
+    if duplicates:
+        number = "unknown"
+
     return render_template('index.html', filename=filename, number=number)
 
 

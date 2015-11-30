@@ -5,4 +5,5 @@
 *.gif
 *.db
 static/img/*.bmp
+images/*/*.bmp
 output.txt
