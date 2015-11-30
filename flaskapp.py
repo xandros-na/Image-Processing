@@ -132,39 +132,68 @@ def zoning():
     return render_template('index.html', filename=filename, img_vector=img_vector)
 
 
-@app.route('/recognize', methods=['POST'])
-def recognize():
+@app.route('/recognize/histogram', methods=['POST'])
+def recognize_hist():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    trimmed = trim(img)
+    img_vector = feature_histogram(trimmed)
+
+    f = open("histogram.txt")
+    minimum = 0
+    index = 0
+
+    for j, line in enumerate(f):
+        c = 0
+        data = line.strip().split(",")
+        for i, d in enumerate(data):
+            c += abs(float(d) - img_vector[i])  
+
+        if j == 0:
+            minimum = c
+            number = str(index)
+        else:
+            if c < minimum:
+                minimum = c
+                print "h", minimum
+                index = j/15
+                number = str(index)
+
+    f.close()
+
+    return render_template('index.html', filename=filename, number=number, returned=True)
+
+@app.route('/recognize/zoning', methods=['POST'])
+def recognize_zone():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     trimmed = trim(img)
     img_vector = zoning_method(trimmed)
 
-    f = open("vectors.txt")
+    f = open("zoning.txt")
     minimum = 0
     index = 0
-    duplicates = False
+
     for j, line in enumerate(f):
         c = 0
         data = line.strip().split(",")
         for i, d in enumerate(data):
             c += abs(float(d) - img_vector[i])
+        c=c*1.0/15.0    
 
         if j == 0:
             minimum = c
+            number = str(index)
         else:
             if c < minimum:
                 minimum = c
-                index = j/5
+                print "z", minimum
+                index = j/15
                 number = str(index)
-                duplicates = False
-            elif c == minimum:
-                duplicates = True
+
     f.close()
-    if duplicates:
-        number = "unknown"
-
-    return render_template('index.html', filename=filename, number=number)
 
 
+    return render_template('index.html', filename=filename, number=number, returned=True)
 if __name__ == '__main__':
     manager.run()

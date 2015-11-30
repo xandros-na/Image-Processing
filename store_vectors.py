@@ -1,9 +1,7 @@
-from flaskapp import db
-import models
 from ImageFile import ImageFile
 from features import feature_histogram, trim, zoning_method
 
-suffix = ['-00a.bmp', '-00b.bmp', '-00c.bmp', '-00d.bmp', '-00e.bmp']
+suffix = ['-00a.bmp', '-00b.bmp', '-00c.bmp', '-00d.bmp', '-00e.bmp', '-00f.bmp', '-00g.bmp', '-00h.bmp', '-00i.bmp', '-00j.bmp', '-00k.bmp', '-00l.bmp', '-00m.bmp', '-00n.bmp', '-00o.bmp']
 
 zeros = dict(path="./images/zero/", v=["0" + j for i,j in enumerate(suffix)])
 ones = dict(path="./images/one/", v=["1" + j for i,j in enumerate(suffix)])
@@ -17,7 +15,7 @@ eights = dict(path="./images/eight/", v=["8" + j for i,j in enumerate(suffix)])
 nines = dict(path="./images/nine/", v=["9" + j for i,j in enumerate(suffix)])
 lists = [zeros, ones, twos, threes, fours, fives, sixs, sevens, eights, nines]
 
-f = open('vectors.txt', 'w')
+f = open('zoning.txt', 'w')
 for l in lists:
     files = l.get('v')
     path = l.get('path')

@@ -77,9 +77,14 @@
                 </form>
 
                 <!--Symbol Recognition-->
-                <form action="{{ url_for('recognize') }}" method=post>
+                <form action="{{ url_for('recognize_hist') }}" method=post>
                     <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">What number is this?</button>
+                    <button type="submit" value="apply">What number is this? Histogram</button>
+                </form>
+
+                <form action="{{ url_for('recognize_zone') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">What number is this? Zoning</button>
                 </form>
             </div>
 
@@ -93,7 +98,7 @@
                 </div>
             {% endif %}
 
-            {% if number %}
+            {% if returned %}
                 <div class="after">
                     <h2>The number is:</h2>
 
