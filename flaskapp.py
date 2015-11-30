@@ -165,7 +165,7 @@ def recognize():
                 duplicates = False
             elif c == minimum:
                 duplicates = True
-
+    f.close()
     if duplicates:
         number = "unknown"
 
