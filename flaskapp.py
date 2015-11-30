@@ -155,7 +155,6 @@ def recognize_hist():
         else:
             if c < minimum:
                 minimum = c
-                print "h", minimum
                 index = j/15
                 number = str(index)
 
@@ -187,7 +186,6 @@ def recognize_zone():
         else:
             if c < minimum:
                 minimum = c
-                print "z", minimum
                 index = j/15
                 number = str(index)
 
