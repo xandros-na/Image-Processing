@@ -147,7 +147,7 @@ def recognize_hist():
         c = 0
         data = line.strip().split(",")
         for i, d in enumerate(data):
-            c += abs(float(d) - img_vector[i])  
+            c += (float(d) - img_vector[i])**2  
 
         if j == 0:
             minimum = c
@@ -177,8 +177,7 @@ def recognize_zone():
         c = 0
         data = line.strip().split(",")
         for i, d in enumerate(data):
-            c += abs(float(d) - img_vector[i])
-        c=c*1.0/15.0    
+            c += (float(d) - img_vector[i])**2
 
         if j == 0:
             minimum = c

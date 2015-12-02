@@ -1,5 +1,4 @@
 from PIL import Image
-from PIL import ImageFilter
 import time
 from datetime import datetime
 

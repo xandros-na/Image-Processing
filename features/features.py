@@ -29,9 +29,7 @@ def feature_histogram(trimmed):
     horizontal = [0 for i in range(16)]
     width = len(trimmed[0])
     height = len(trimmed)
-    # width, height, trimmed = _append_zero(trimmed, 16)
-    # for i in trimmed:
-    # 	print(i)
+
     sub_y = width / 16
     sub_x = height / 16
 
@@ -53,30 +51,9 @@ def feature_histogram(trimmed):
     return feature_vector
 
 
-# def _append_zero(trimmed, n):
-# 	rem_w = 0
-# 	rem_h = 0
-# 	width = len(trimmed[0])
-# 	height = len(trimmed)
-# 	if width%n != 0 or width < n:
-# 		rem_w = n-(width % n)
-# 		for row in trimmed:
-# 			for r in range(rem_w):
-# 				row.append(255)
-
-# 	width += rem_w
-# 	if height%n != 0 or height < n:
-# 		rem_h = n-(height % n)
-# 		for h in range(rem_h):
-# 			trimmed.append([255 for i in range(width)])
-# 	height += rem_h	
-# 	return width, height, trimmed
-
 def zoning_method(trimmed):
-    feature_vector = []
     width = len(trimmed[0])
     height = len(trimmed)
-    # width, height, trimmed = _append_zero(trimmed, 4)
 
     sub_y = width / 4
     sub_x = height / 4
