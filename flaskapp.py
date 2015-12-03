@@ -142,22 +142,25 @@ def recognize_hist():
     f = open("histogram.txt")
     minimum = 0
     index = 0
-    temp = [0 for i in range(10)]
+
     for j, line in enumerate(f):
+        c = 0
         data = line.strip().split(",")
         for i, d in enumerate(data):
-            temp[j // 15] += (float(d) - img_vector[i]) ** 2
+            c += (float(d) - img_vector[i])**2  
 
-    minimum = 0
-    for i in range(10):
-        if temp[i] < temp[minimum]:
-            minimum = i
-        number = str(minimum)
+        if j == 0:
+            minimum = c
+            number = str(index)
+        else:
+            if c < minimum:
+                minimum = c
+                index = j/15
+                number = str(index)
 
     f.close()
 
     return render_template('index.html', filename=filename, number=number, returned=True)
-
 
 @app.route('/recognize/zoning', methods=['POST'])
 def recognize_zone():
@@ -169,24 +172,25 @@ def recognize_zone():
     f = open("zoning.txt")
     minimum = 0
     index = 0
-    temp = [0 for i in range(10)]
 
     for j, line in enumerate(f):
         c = 0
         data = line.strip().split(",")
         for i, d in enumerate(data):
-            temp[j // 15] += (float(d) - img_vector[i]) ** 2
+            c += (float(d) - img_vector[i])**2
 
-    minimum = 0
-    for i in range(10):
-        if temp[i] < temp[minimum]:
-            minimum = i
-        number = str(minimum)
+        if j == 0:
+            minimum = c
+            number = str(index)
+        else:
+            if c < minimum:
+                minimum = c
+                index = j/15
+                number = str(index)
 
     f.close()
 
+
     return render_template('index.html', filename=filename, number=number, returned=True)
-
-
 if __name__ == '__main__':
     manager.run()
