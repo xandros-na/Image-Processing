@@ -19,7 +19,7 @@
         <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
             <input type="file" name="file" class="select-file">
             <br>
-            <button type="submit" class="suggested-action" value="Upload">Upload</button>
+            <button type="submit" class="suggested-action" value="Upload" style="width: 98px">Upload</button>
         </form>
         {% with messages = get_flashed_messages() %}
             {% if messages and "File" in messages[-1] %}
@@ -36,59 +36,7 @@
                 <div>{{ filename }}</div>
                 <img src='../static/img/{{ filename }}'>
                 <br><br>
-
-                <!--Filter-->
-                <h4>Enter Kernel</h4>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages and "kernel" in messages[-1] %}
-                        <div class="warning">{{ messages[-1] }}</div>
-                    {% endif %}
-                {% endwith %}
-                <form action="{{ url_for('filter') }}" method=post>
-                    <input type=text name=k0>
-                    <input type=text name=k1>
-                    <input type=text name=k2><br>
-                    <input type=text name=k3>
-                    <input type=text name=k4>
-                    <input type=text name=k5><br>
-                    <input type=text name=k6>
-                    <input type=text name=k7>
-                    <input type=text name=k8><br>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">Apply Filter</button>
-                </form>
-
-                <!--Thinning-->
-                <form action="{{ url_for('thinning') }}" method=post>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">Apply ZS Thinning</button>
-                </form>
-
-                <!--Vector Histogram-->
-                <form action="{{ url_for('histogram') }}" method=post>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">Get Vector (Histogram)</button>
-                </form>
-
-                <!--Vector Zoning-->
-                <form action="{{ url_for('zoning') }}" method=post>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">Get Vector (Zoning)</button>
-                </form>
-
-                <!--Symbol Recognition-->
-                <form action="{{ url_for('recognize_hist') }}" method=post>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">What number is this? Histogram</button>
-                </form>
-
-                <form action="{{ url_for('recognize_zone') }}" method=post>
-                    <input type=hidden name=filename value="{{ filename }}">
-                    <button type="submit" value="apply">What number is this? Zoning</button>
-                </form>
             </div>
-
-
             {% if new_file %}
                 <div class="after">
                     <h2>After:</h2>
@@ -105,16 +53,78 @@
                     <div>{{ number }}</div>
                 </div>
             {% endif %}
+
+            {% if img_vector %}
+                <div class="after">
+                    <h2>Vector for this Image:</h2>
+
+                    <div>{{ img_vector }}</div>
+                </div>
+            {% endif %}
         </div>
+        <!--Filter-->
+        <div class="form-container">
+            <div class="row">
+                <h4>Enter Kernel:</h4>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages and "kernel" in messages[-1] %}
+                        <div class="warning">{{ messages[-1] }}</div>
+                    {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('filter') }}" method=post style="display: inline-block">
+                    <input type=text name=k0>
+                    <input type=text name=k1>
+                    <input type=text name=k2><br>
+                    <input type=text name=k3>
+                    <input type=text name=k4>
+                    <input type=text name=k5><br>
+                    <input type=text name=k6>
+                    <input type=text name=k7>
+                    <input type=text name=k8><br>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply" style="width: 120px">Apply Filter</button>
+                </form>
+            </div>
+
+            <div class="row row-2">
+                <!--Thinning-->
+                <form action="{{ url_for('thinning') }}" method=post style="display: inline-block">
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Apply ZS Thinning</button>
+                </form>
+
+                <!--Vector Histogram-->
+                <form action="{{ url_for('histogram') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Get Vector (Histogram)</button>
+                </form>
+
+                <!--Vector Zoning-->
+                <form action="{{ url_for('zoning') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">Get Vector (Zoning)</button>
+                </form>
+            </div>
+
+            <div class="row">
+                <!--Symbol Recognition-->
+                <form action="{{ url_for('recognize_hist') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">What number is this? Histogram</button>
+                </form>
+
+                <form action="{{ url_for('recognize_zone') }}" method=post>
+                    <input type=hidden name=filename value="{{ filename }}">
+                    <button type="submit" value="apply">What number is this? Zoning</button>
+                </form>
+            </div>
+        </div>
+
+
+
     {% endif %}
 
-    {% if img_vector %}
-        <div class="vector">
-            <h2>Vector for this Image:</h2>
 
-            <div>{{ img_vector }}</div>
-        </div>
-    {% endif %}
 </div>
 </body>
 </html>

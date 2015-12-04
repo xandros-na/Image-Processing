@@ -50,9 +50,9 @@ button,
     display: inline-block;
     font-family: inherit;
     font-size: 16px;
-    max-width: 250px;
+    width: 210px;
     outline: none;
-    padding: 8px 16px;
+    padding: 4px 8px;
     text-align: center;
     text-decoration: none;
     margin-top: 12px;
@@ -85,7 +85,7 @@ input[type="text"] {
     }
 }
 
-.upload, .picture, .vector {
+.upload, .picture, .vector, .form-container {
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 3px;
     padding: 32px;
@@ -107,4 +107,14 @@ input[type="text"] {
 .warning {
     color: #ef5357;
     margin: 8px 0px;
+}
+
+.row {
+    width: 25%;
+    display: inline-block;
+    float:left;
+}
+
+.row-2 {
+    width: 30%;
 }
