@@ -118,3 +118,9 @@ input[type="text"] {
 .row-2 {
     width: 30%;
 }
+
+@media (max-width: 991px) {
+    .row, .row-2 {
+        width: 100%;
+    }
+}
