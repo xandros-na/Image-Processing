@@ -1,24 +1,27 @@
-# A basic Flask quickstart 
-*With support for serving easy APIs and static content*
+# Image Processing Project
 
-[![Build Status](http://img.shields.io/travis/ryanj/flask-base.svg)](https://travis-ci.org/ryanj/flask-base) [![Deploy](https://img.shields.io/badge/Launch_on-OpenShift-brightgreen.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=python-2&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fflask-base.git&name=flask)
 
-[![Launch on OpenShift](http://launch-shifter.rhcloud.com/button.svg)](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=python-2.7&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fflask-base.git&name=flask)
+A web-based application is introduced to recognize and analyze handwritten digits. The system used is statistical methods such as Zoning and Histogram. The system crops the image such that only the significant part of the image is obtained and essentially discarding unneeded whitespace to reduce processing time. There are two different databases that are used to store feature vectors obtained from Zoning and Histogram methods. A sample of twenty images are tested against these methods and we found that Zoning method recognized our inputs correctly 95% of the time on average and Histogram method recognized them 77% of the time on average. The project URL is http://project-cp467.rhcloud.com.
 
-To deploy a clone of this application using the [`rhc` command line tool](http://rubygems.org/gems/rhc):
 
-    rhc app create flask python-2.7 --from-code=https://github.com/ryanj/flask-base.git
-    
-Or [link to a web-based clone+deploy](https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=python-2.7&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fflask-base.git) on [OpenShift Online](http://OpenShift.com) or on [your own OpenShift cloud](http://openshift.github.io): 
+## Features
+1. Filters
+  - Low / High pass filters, Median filter, Gaussian filter
+  
+2. Zhang-Suen Thinning
 
-    https://openshift.redhat.com/app/console/application_type/custom?cartridges%5B%5D=python-2.7&initial_git_url=https%3A%2F%2Fgithub.com%2Fryanj%2Fflask-base.git
+3. Image Vector Retrieval
+  - Zoning and Histogram methods
+  
+4. Handwritten Recognition
+  - single digit from 0-9
 
-## Local server
-Start a local webserver by running:
 
-```bash
-python app.py
-```
+## Installation and Run
+1. `pip install -r requirements.txt`
+2. `python app.py`
+3. Visit `127.0.0.1:8080`
 
-## License
-This code is dedicated to the public domain to the maximum extent permitted by applicable law, pursuant to CC0 (http://creativecommons.org/publicdomain/zero/1.0/)
+
+### Authors:
+Don Miguel and [Chunxiao Li](https://github.com/ian8170)
