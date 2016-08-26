@@ -17,7 +17,7 @@ h1 {
     text-align: center;
 }
 
-h2, h4 {
+h2, h4, h3 {
     margin: 0 0 8px 0;
 }
 
@@ -85,7 +85,7 @@ input[type="text"] {
     }
 }
 
-.upload, .picture, .vector, .form-container {
+.upload, .picture, .vector, .form-container, .about {
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 3px;
     padding: 32px;

@@ -15,17 +15,35 @@
     <h1>CP467 Image Processing Final Project</h1>
     <h4 id="author">Authors: Chunxiao Li and Don Miguel</h4>
 
+    <div class="about">
+        <h3>About this Project</h3>
+        <p>A web-based application is introduced to recognize and analyze handwritten digits and to perform various image manipulations (filters and thinning). The system used is statistical methods such as Zoning and Histogram. The system crops the image such that only the significant part of the image is obtained and essentially discarding unneeded whitespace to reduce processing time.</p>
+        <p> There are two different databases that are used to store feature vectors obtained from Zoning and Histogram methods. A sample of twenty images are tested against these methods and we found that Zoning method recognized our inputs correctly 95% of the time on average and Histogram method recognized them 77% of the time on average. </p>
+    </div>
+
     <div class="upload">
-        <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
-            <input type="file" name="file" class="select-file">
-            <br>
-            <button type="submit" class="suggested-action" value="Upload" style="width: 98px">Upload</button>
-        </form>
-        {% with messages = get_flashed_messages() %}
-            {% if messages and "File" in messages[-1] %}
-                <div class="warning">{{ messages[-1] }}</div>
-            {% endif %}
-        {% endwith %}
+        <h3>Start</h3>
+        <p>Upload a bmp file or load a default image</p>
+
+        <div class="before">
+            <form action="{{ url_for('upload') }}" method=post enctype=multipart/form-data>
+                <input type="file" name="file" class="select-file">
+                <br>
+                <button type="submit" class="suggested-action" value="Upload" style="width: 98px">Upload</button>
+            </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages and "File" in messages[-1] %}
+                    <div class="warning">{{ messages[-1] }}</div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="after">
+            <form action="{{ url_for('load') }}" method=post>
+                <button name="load" type="submit" class="suggested-action" value="8bit" style="width: 180px; margin-top: 39px">Load (8bit depth)</button>
+                <button name="load" type="submit" class="suggested-action" value="1bit" style="width: 180px; margin-top: 39px">Load (1bit depth)</button>
+            </form>
+        </div>
     </div>
 
     {% if filename %}
@@ -35,6 +53,11 @@
 
                 <div>{{ filename }}</div>
                 <img src='../static/img/{{ filename }}'>
+                {% with messages = get_flashed_messages() %}
+                {% if messages and "depth" in messages[-1] %}
+                    <div class="warning">{{ messages[-1] }}</div>
+                {% endif %}
+            {% endwith %}
             </div>
             {% if new_file %}
                 <div class="after">
