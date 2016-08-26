@@ -35,7 +35,12 @@ def image(filename):
         return abort(404)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         file = request.files['file']
@@ -50,8 +55,18 @@ def upload():
                 return redirect(url_for('upload'))
         else:
             flash('File extension not allowed. Only .bmp files are supported')
+            return render_template('index.html')
+    else:
+        return render_template('index.html')
 
-    return render_template('index.html')
+
+@app.route('/load', methods=['POST'])
+def load():
+    filename = "2016-03-03-15-22-00-fruits.bmp"
+    if request.form['load'] == "1bit":
+        filename = "2015-12-09-01-04-57-test.bmp"
+    return redirect(url_for('image', filename=filename))
+
 
 
 def convert(n):
@@ -108,38 +123,44 @@ def filter():
 def thinning():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    output = zs_thin(img)
-    new_file = img.save_img(output, filename, thinning=True)
-    move_file(new_file)
-    return render_template('index.html', filename=filename, new_file=new_file)
-
+    if img.mode == "1":
+        output = zs_thin(img)
+        new_file = img.save_img(output, filename, thinning=True)
+        move_file(new_file)
+        return render_template('index.html', filename=filename, new_file=new_file)
+    else:
+        flash("Image must have bit depth of 1")
+        return redirect(url_for('image', filename=filename))
 
 @app.route('/histogram', methods=['POST'])
 def histogram():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    trimmed = trim(img)
-    img_vector = feature_histogram(trimmed)
-    return render_template('index.html', filename=filename, img_vector=img_vector)
+    if img.mode == "1":
+        trimmed = trim(img)
+        img_vector = feature_histogram(trimmed)
+        return render_template('index.html', filename=filename, img_vector=img_vector)
+    else:
+        flash("Image must have bit depth of 1")
+        return redirect(url_for('image', filename=filename))
 
 
 @app.route('/zoning', methods=['POST'])
 def zoning():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    trimmed = trim(img)
-    img_vector = zoning_method(trimmed)
-    return render_template('index.html', filename=filename, img_vector=img_vector)
+    if img.mode == "1":
+        trimmed = trim(img)
+        img_vector = feature_histogram(trimmed)
+        return render_template('index.html', filename=filename, img_vector=img_vector)
+    else:
+        flash("Image must have bit depth of 1")
+        return redirect(url_for('image', filename=filename))
 
 
-@app.route('/recognize/histogram', methods=['POST'])
-def recognize_hist():
-    filename = request.form['filename']
-    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    trimmed = trim(img)
-    img_vector = feature_histogram(trimmed)
 
-    f = open("histogram.txt")
+def compare(method_file, img_vector):
+    f = open(method_file)
     minimum = 0
     index = 0
 
@@ -159,38 +180,34 @@ def recognize_hist():
                 number = str(index)
 
     f.close()
+    return number
 
-    return render_template('index.html', filename=filename, number=number, returned=True)
+
+@app.route('/recognize/histogram', methods=['POST'])
+def recognize_hist():
+    filename = request.form['filename']
+    img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    if img.mode == "1":
+        trimmed = trim(img)
+        img_vector = feature_histogram(trimmed)
+        number = compare("histogram.txt", img_vector)
+        return render_template('index.html', filename=filename, number=number, returned=True)
+    else:
+        flash("Image must have bit depth of 1")
+        return redirect(url_for('image', filename=filename))       
 
 @app.route('/recognize/zoning', methods=['POST'])
 def recognize_zone():
     filename = request.form['filename']
     img = ImageFile(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    trimmed = trim(img)
-    img_vector = zoning_method(trimmed)
+    if img.mode == "1":
+        trimmed = trim(img)
+        img_vector = feature_histogram(trimmed)
+        number = compare("histogram.txt", img_vector)
+        return render_template('index.html', filename=filename, number=number, returned=True)
+    else:
+        flash("Image must have bit depth of 1")
+        return redirect(url_for('image', filename=filename)) 
 
-    f = open("zoning.txt")
-    minimum = 0
-    index = 0
-
-    for j, line in enumerate(f):
-        c = 0
-        data = line.strip().split(",")
-        for i, d in enumerate(data):
-            c += (float(d) - img_vector[i])**2
-
-        if j == 0:
-            minimum = c
-            number = str(index)
-        else:
-            if c < minimum:
-                minimum = c
-                index = j/25
-                number = str(index)
-
-    f.close()
-
-
-    return render_template('index.html', filename=filename, number=number, returned=True)
 if __name__ == '__main__':
     manager.run()

@@ -12,6 +12,7 @@ class ImageFile:
     def _open_file(self):
         fp = open(self.filename, "rb")
         self.img = Image.open(fp)
+        self.mode = self.img.mode
         pixels = list(self.img.getdata())
         self.width, self.height = self.img.size
         self.pixels = [pixels[i * self.width:(i + 1) * self.width] for i in range(self.height)]
